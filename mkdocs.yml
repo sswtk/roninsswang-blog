@@ -1,0 +1,71 @@
+site_name: RoninssWang-Blog
+repo_url: https://github.com/example/repository/
+
+theme:
+  name: material
+  palette:
+    primary: 'Blue Grey'
+    accent: 'Pink'
+  feature:
+    tabs: true
+  language: 'zh'
+
+extra:
+  palette:
+    primary: 'Blue Grey'
+    accent: 'Pink'
+plugins:
+    - search:
+        separator: '[\s\-\.]+'
+
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+      linenums: false
+  - toc:
+      permalink: true
+  - footnotes
+  - meta
+  - def_list
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist
+  - pymdownx.tilde
+
+
+nav:
+- 主页: index.md
+- IT-之路:
+  - 【 Python 】:
+    - 基础: 
+      - 装饰器: python-base/decator.md
+  - 【 Golang 】:
+    - 编写文档: user-guide/writing-your-docs.md
+  - 【 Devops 】:
+    - 编写文档: user-guide/writing-your-docs.md
+  - 【 AI学习 】:
+    - 编写文档: user-guide/writing-your-docs.md
+  - 【 BigData 】:
+    - 编写文档: user-guide/writing-your-docs.md
+  - 【 综合 】:
+    - 编写文档: user-guide/writing-your-docs.md
+    - 设置文档样式: user-guide/styling-your-docs.md
+    - 配置文件: user-guide/configuration.md
+    - 部署文档: user-guide/deploying-your-docs.md
+    - 自定义主题: user-guide/custom-themes.md
+    - 插件: user-guide/plugins.md
+- Life-时笺:
+  - 予时光以意义: user-guide/writing-your-docs.md
+- 关于:
+    - 发行说明: about/release-notes.md
+    
