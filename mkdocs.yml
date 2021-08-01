@@ -44,28 +44,29 @@ markdown_extensions:
 
 
 nav:
-- 主页: index.md
-- IT-之路:
-  - 【 Python 】:
+- Home: index.md
+- IT — Router:
+  - 【 @Note - Python 】:
     - 基础: 
       - 装饰器: python-base/decator.md
-  - 【 Golang 】:
+  - 【 @Note - Golang 】:
+    - Go基础: 
+      - goNotes/go-base/基础知识.md
+  - 【 @Note - Devops 】:
     - 编写文档: user-guide/writing-your-docs.md
-  - 【 Devops 】:
+  - 【 @study - AI学习 】:
     - 编写文档: user-guide/writing-your-docs.md
-  - 【 AI学习 】:
+  - 【 @study - BigData 】:
     - 编写文档: user-guide/writing-your-docs.md
-  - 【 BigData 】:
-    - 编写文档: user-guide/writing-your-docs.md
-  - 【 综合 】:
+  - 【 @study - 综合 】:
     - 编写文档: user-guide/writing-your-docs.md
     - 设置文档样式: user-guide/styling-your-docs.md
     - 配置文件: user-guide/configuration.md
     - 部署文档: user-guide/deploying-your-docs.md
     - 自定义主题: user-guide/custom-themes.md
     - 插件: user-guide/plugins.md
-- Life-时笺:
+- Life - 时笺:
   - 予时光以意义: user-guide/writing-your-docs.md
-- 关于:
+- About - Self:
     - 发行说明: about/release-notes.md
     
