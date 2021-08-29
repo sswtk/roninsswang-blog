@@ -1,7 +1,19 @@
+# 站点名称
 site_name: RoninssWang-Blog
+# 仓库链接
 repo_url: https://github.com/example/repository/
-
+# 作者
+site_author: 'sswang'
+# 版权信息
+copyright: '2021, sswang'
+# 源文件目录
+docs_dir: 'docs'
+# 生成静态文件目录
+site_dir: 'site'
+# 主题
 theme:
+  # name: 'readthedocs'
+  # name: 'mkdocs'
   name: material
   palette:
     primary: 'Blue Grey'
@@ -9,15 +21,17 @@ theme:
   feature:
     tabs: true
   language: 'zh'
-
+# 额外信息
 extra:
+  # 版本号
+  version: 0.1.0
   palette:
     primary: 'Blue Grey'
     accent: 'Pink'
 plugins:
     - search:
         separator: '[\s\-\.]+'
-
+# markdown扩展
 markdown_extensions:
   - admonition
   - codehilite:
@@ -28,7 +42,12 @@ markdown_extensions:
   - footnotes
   - meta
   - def_list
+  # 参考[MathJax](https://squidfunk.github.io/mkdocs-material/reference/mathjax/)，支持数学公式渲染
   - pymdownx.arithmatex
+   # 参考[Icons + Emojis](https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/)，执行Markdown Emoji
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.betterem:
       smart_enable: all
   - pymdownx.caret
@@ -42,22 +61,29 @@ markdown_extensions:
   - pymdownx.tasklist
   - pymdownx.tilde
 
+# mathjax
+extra_javascript:
+  - javascripts/config.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
+# 导航
 nav:
 - Home: index.md
-- IT — Router:
+- NoteHub:
   - 【 @Note - Python 】:
     - 基础: 
-      - 装饰器: python-base/decator.md
+      - 装饰器的使用: pyNotes/decator.md
   - 【 @Note - Golang 】:
     - Go基础: 
       - goNotes/go-base/基础知识.md
   - 【 @Note - Devops 】:
-    - 编写文档: user-guide/writing-your-docs.md
-  - 【 @study - AI学习 】:
-    - 编写文档: user-guide/writing-your-docs.md
-  - 【 @study - BigData 】:
-    - 编写文档: user-guide/writing-your-docs.md
+    - kubernetes:
+      - 【k8s】集群搭建指南: devopsNotes/kubernetes/kubeadm安装集群指南.md
+  # - 【 @study - AI学习 】:
+  #   - 编写文档: user-guide/writing-your-docs.md
+  # - 【 @study - BigData 】:
+  #   - 编写文档: user-guide/writing-your-docs.md
   - 【 @study - 综合 】:
     - 编写文档: user-guide/writing-your-docs.md
     - 设置文档样式: user-guide/styling-your-docs.md
@@ -65,8 +91,8 @@ nav:
     - 部署文档: user-guide/deploying-your-docs.md
     - 自定义主题: user-guide/custom-themes.md
     - 插件: user-guide/plugins.md
-- Life - 时笺:
-  - 予时光以意义: user-guide/writing-your-docs.md
-- About - Self:
-    - 发行说明: about/release-notes.md
+# - Life - 时笺:
+#   - 予时光以意义: user-guide/writing-your-docs.md
+# - About - Self:
+#     - 发行说明: about/release-notes.md
     
