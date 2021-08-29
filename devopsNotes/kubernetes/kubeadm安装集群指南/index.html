@@ -1,0 +1,1790 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="sswang">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.5">
+    
+    
+      
+        <title>【k8s】集群搭建指南 - RoninssWang-Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.be71726b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#546d78">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="pink">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#step1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="RoninssWang-Blog" class="md-header__button md-logo" aria-label="RoninssWang-Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RoninssWang-Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              【k8s】集群搭建指南
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/example/repository/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="RoninssWang-Blog" class="md-nav__button md-logo" aria-label="RoninssWang-Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    RoninssWang-Blog
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/example/repository/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        NoteHub
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="NoteHub" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          NoteHub
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      <label class="md-nav__link" for="__nav_2_1">
+        【 @Note - Python 】
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="【 @Note - Python 】" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          【 @Note - Python 】
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1" type="checkbox" id="__nav_2_1_1" >
+      
+      <label class="md-nav__link" for="__nav_2_1_1">
+        基础
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="基础" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pyNotes/decator/" class="md-nav__link">
+        装饰器的使用
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      <label class="md-nav__link" for="__nav_2_2">
+        【 @Note - Golang 】
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="【 @Note - Golang 】" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          【 @Note - Golang 】
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" >
+      
+      <label class="md-nav__link" for="__nav_2_2_1">
+        Go基础
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Go基础" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Go基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../goNotes/go-base/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="md-nav__link">
+        基础知识
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" checked>
+      
+      <label class="md-nav__link" for="__nav_2_3">
+        【 @Note - Devops 】
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="【 @Note - Devops 】" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          【 @Note - Devops 】
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3_1" type="checkbox" id="__nav_2_3_1" checked>
+      
+      <label class="md-nav__link" for="__nav_2_3_1">
+        kubernetes
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="kubernetes" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          【k8s】集群搭建指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        【k8s】集群搭建指南
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step1" class="md-nav__link">
+    STEP1: 前置工作(准备/检查环境)
+  </a>
+  
+    <nav class="md-nav" aria-label="STEP1: 前置工作(准备/检查环境)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1.集群服务器要求：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2ipdnshosts" class="md-nav__link">
+    2.设置服务器静态IP/DNS/hosts主机名
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3hostname" class="md-nav__link">
+    3.设置主机名（hostname）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4hosts" class="md-nav__link">
+    4.查看或设置hosts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5.禁用防火墙：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6swap" class="md-nav__link">
+    6.禁用swap（交换分区）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7selinux" class="md-nav__link">
+    7.禁用selinux
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8br_netfilter" class="md-nav__link">
+    8.加载br_netfilter模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9ipv4iptables" class="md-nav__link">
+    9.将桥接的IPv4流量传递到iptables的链
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-ipvs" class="md-nav__link">
+    10.安装 ipvs：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    11.同步服务器时间
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    12.安装常用软件
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step2docker" class="md-nav__link">
+    STEP2:安装依赖——Docker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step3kubeadmkubeletkubectl" class="md-nav__link">
+    STEP3:安装kubeadm/kubelet/kubectl
+  </a>
+  
+    <nav class="md-nav" aria-label="STEP3:安装kubeadm/kubelet/kubectl">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1yum" class="md-nav__link">
+    1.设置yum源
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2yum" class="md-nav__link">
+    2.重新构建yum缓存
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3kubeadmkubeletkubectl" class="md-nav__link">
+    3.安装kubeadm/kubelet/kubectl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4kubelet" class="md-nav__link">
+    4.设置kubelet服务开机启动
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step4" class="md-nav__link">
+    STEP4: 初始化集群
+  </a>
+  
+    <nav class="md-nav" aria-label="STEP4: 初始化集群">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yaml" class="md-nav__link">
+    方式一：配置yaml的方式
+  </a>
+  
+    <nav class="md-nav" aria-label="方式一：配置yaml的方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    1.导出默认的初始化配置：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2.根据需求修改配置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3.执行初始化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    方式二：使用命令行指定配置参数方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubeconfig" class="md-nav__link">
+    拷贝 kubeconfig 文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    查看节点信息
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step5" class="md-nav__link">
+    STEP5:添加节点
+  </a>
+  
+    <nav class="md-nav" aria-label="STEP5:添加节点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1kubeadm-kubelet-kubectl" class="md-nav__link">
+    1.安装kubeadm 、 kubelet 、kubectl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2join" class="md-nav__link">
+    2.执行join操作
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3master" class="md-nav__link">
+    3.在master查看节点信息
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step6" class="md-nav__link">
+    STEP6: 安装网络插件
+  </a>
+  
+    <nav class="md-nav" aria-label="STEP6: 安装网络插件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1flannel" class="md-nav__link">
+    1.安装flannel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2master" class="md-nav__link">
+    2.再次在master查看节点信息
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    备注内容：
+  </a>
+  
+    <nav class="md-nav" aria-label="备注内容：">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    重置的方法：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    彻底卸载的方法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      <label class="md-nav__link" for="__nav_2_4">
+        【 @study - 综合 】
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="【 @study - 综合 】" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          【 @study - 综合 】
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-guide/writing-your-docs.md" class="md-nav__link">
+        编写文档
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-guide/styling-your-docs.md" class="md-nav__link">
+        设置文档样式
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-guide/configuration.md" class="md-nav__link">
+        配置文件
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-guide/deploying-your-docs.md" class="md-nav__link">
+        部署文档
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-guide/custom-themes.md" class="md-nav__link">
+        自定义主题
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-guide/plugins.md" class="md-nav__link">
+        插件
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step1" class="md-nav__link">
+    STEP1: 前置工作(准备/检查环境)
+  </a>
+  
+    <nav class="md-nav" aria-label="STEP1: 前置工作(准备/检查环境)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1.集群服务器要求：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2ipdnshosts" class="md-nav__link">
+    2.设置服务器静态IP/DNS/hosts主机名
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3hostname" class="md-nav__link">
+    3.设置主机名（hostname）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4hosts" class="md-nav__link">
+    4.查看或设置hosts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5.禁用防火墙：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6swap" class="md-nav__link">
+    6.禁用swap（交换分区）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7selinux" class="md-nav__link">
+    7.禁用selinux
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8br_netfilter" class="md-nav__link">
+    8.加载br_netfilter模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9ipv4iptables" class="md-nav__link">
+    9.将桥接的IPv4流量传递到iptables的链
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-ipvs" class="md-nav__link">
+    10.安装 ipvs：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    11.同步服务器时间
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    12.安装常用软件
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step2docker" class="md-nav__link">
+    STEP2:安装依赖——Docker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step3kubeadmkubeletkubectl" class="md-nav__link">
+    STEP3:安装kubeadm/kubelet/kubectl
+  </a>
+  
+    <nav class="md-nav" aria-label="STEP3:安装kubeadm/kubelet/kubectl">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1yum" class="md-nav__link">
+    1.设置yum源
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2yum" class="md-nav__link">
+    2.重新构建yum缓存
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3kubeadmkubeletkubectl" class="md-nav__link">
+    3.安装kubeadm/kubelet/kubectl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4kubelet" class="md-nav__link">
+    4.设置kubelet服务开机启动
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step4" class="md-nav__link">
+    STEP4: 初始化集群
+  </a>
+  
+    <nav class="md-nav" aria-label="STEP4: 初始化集群">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yaml" class="md-nav__link">
+    方式一：配置yaml的方式
+  </a>
+  
+    <nav class="md-nav" aria-label="方式一：配置yaml的方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    1.导出默认的初始化配置：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2.根据需求修改配置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3.执行初始化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    方式二：使用命令行指定配置参数方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubeconfig" class="md-nav__link">
+    拷贝 kubeconfig 文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    查看节点信息
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step5" class="md-nav__link">
+    STEP5:添加节点
+  </a>
+  
+    <nav class="md-nav" aria-label="STEP5:添加节点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1kubeadm-kubelet-kubectl" class="md-nav__link">
+    1.安装kubeadm 、 kubelet 、kubectl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2join" class="md-nav__link">
+    2.执行join操作
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3master" class="md-nav__link">
+    3.在master查看节点信息
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step6" class="md-nav__link">
+    STEP6: 安装网络插件
+  </a>
+  
+    <nav class="md-nav" aria-label="STEP6: 安装网络插件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1flannel" class="md-nav__link">
+    1.安装flannel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2master" class="md-nav__link">
+    2.再次在master查看节点信息
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    备注内容：
+  </a>
+  
+    <nav class="md-nav" aria-label="备注内容：">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    重置的方法：
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    彻底卸载的方法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/example/repository/edit/master/docs/devopsNotes/kubernetes/kubeadm安装集群指南.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>【k8s】集群搭建指南</h1>
+                
+                <h2 id="step1">STEP1: 前置工作(准备/检查环境)<a class="headerlink" href="#step1" title="Permanent link">&para;</a></h2>
+<h3 id="1">1.集群服务器要求：<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>每台机器 2 GB 或更多的内存 (如果少于这个数字将会影响您应用的运行内存)</li>
+<li>2 CPU 或更多</li>
+<li>集群中的所有机器的网络互通</li>
+<li>可以访问外网</li>
+<li>禁止 swap 分区<blockquote>
+<p>eg:</p>
+</blockquote>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>IP</th>
+<th>主机名</th>
+<th>系统版本</th>
+<th>CPU</th>
+<th>内存</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.33.131</td>
+<td>master1</td>
+<td>centos8.2</td>
+<td>2G</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td>此配置为最低要求</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>192.168.33.132</td>
+<td>node1</td>
+<td>centos8.2</td>
+<td>2G</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td>192.168.33.133</td>
+<td>node2</td>
+<td>centos8.2</td>
+<td>2G</td>
+<td>2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="2ipdnshosts">2.设置服务器静态IP/DNS/hosts主机名<a class="headerlink" href="#2ipdnshosts" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>eg：</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1"># 查看网卡名字</span>
+nmcli d
+
+<span class="c1"># 修改配置文件，xxx为对应网卡的名字</span>
+vim /etc/sysconfig/network-scripts/ifcfg-xxx   
+
+<span class="c1"># 修改并保存网卡信息（修改demo如下：）</span>
+<span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;Ethernet&quot;</span>
+<span class="nv">PROXY_METHOD</span><span class="o">=</span><span class="s2">&quot;none&quot;</span>
+<span class="nv">BROWSER_ONLY</span><span class="o">=</span><span class="s2">&quot;no&quot;</span>
+<span class="nv">BOOTPROTO</span><span class="o">=</span><span class="s2">&quot;static&quot;</span> <span class="c1">#启用静态IP地址</span>
+<span class="nv">DEFROUTE</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="nv">IPV4_FAILURE_FATAL</span><span class="o">=</span><span class="s2">&quot;no&quot;</span>
+<span class="nv">IPV6INIT</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="nv">IPV6_AUTOCONF</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="nv">IPV6_DEFROUTE</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="nv">IPV6_FAILURE_FATAL</span><span class="o">=</span><span class="s2">&quot;no&quot;</span>
+<span class="nv">IPV6_ADDR_GEN_MODE</span><span class="o">=</span><span class="s2">&quot;stable-privacy&quot;</span>
+<span class="nv">NAME</span><span class="o">=</span><span class="s2">&quot;ens33&quot;</span>
+<span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;5e51c653-26b7-4e87-bbe6-4a06df6ff1d4&quot;</span>
+<span class="nv">DEVICE</span><span class="o">=</span><span class="s2">&quot;ens33&quot;</span>
+<span class="nv">ONBOOT</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="nv">IPADDR</span><span class="o">=</span><span class="s2">&quot;192.168.33.132&quot;</span> <span class="c1">#设置IP地址</span>
+<span class="nv">NETMASK</span><span class="o">=</span><span class="s2">&quot;255.255.255.0&quot;</span>  <span class="c1">#设置子网掩码</span>
+<span class="nv">GATEWAY</span><span class="o">=</span><span class="s2">&quot;192.168.189.2&quot;</span>  <span class="c1">#设置网关</span>
+<span class="nv">DNS1</span><span class="o">=</span><span class="s2">&quot;8.8.8.8&quot;</span>           <span class="c1">#DNS</span>
+<span class="nv">DNS2</span><span class="o">=</span><span class="s2">&quot;114.114.114.114&quot;</span>
+
+<span class="c1"># 保存退出并重启网卡 xxx为网卡名</span>
+ifup xxx
+（eg: ifup ens33）
+</code></pre></div>
+<h3 id="3hostname">3.设置主机名（hostname）<a class="headerlink" href="#3hostname" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># xxx为主机名 </span>
+hostnamectl set-hostname xxx 
+</code></pre></div>
+<h3 id="4hosts">4.查看或设置hosts<a class="headerlink" href="#4hosts" title="Permanent link">&para;</a></h3>
+<ul>
+<li>节点的 hostname 必须使用标准的 DNS 命名，另外千万不用什么默认的 <code>localhost</code> 的 hostname，会导致各种错误出现的。在 Kubernetes 项目里，机器的名字以及一切存储在 Etcd 中的 API 对象，都必须使用标准的 DNS 命名（RFC 1123）。可以使用命令 <code>hostnamectl set-hostname ydzs-node1</code> 来修改 hostname。
+<div class="highlight"><pre><span></span><code>vim /etc/hosts 添加如下信息
+<span class="m">192</span>.168.33.131 master1
+<span class="m">192</span>.168.33.132 node1
+<span class="m">192</span>.168.33.133 node2
+
+或
+cat &gt;&gt; /etc/hosts <span class="s">&lt;&lt; EOF</span>
+<span class="s">192.168.33.131 master1</span>
+<span class="s">192.168.33.132 node1</span>
+<span class="s">192.168.33.133 node2</span>
+<span class="s">EOF</span>
+</code></pre></div></li>
+</ul>
+<h3 id="5">5.禁用防火墙：<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>systemctl stop firewalld <span class="o">&amp;&amp;</span> systemctl disable firewalld
+</code></pre></div>
+<h3 id="6swap">6.禁用swap（交换分区）<a class="headerlink" href="#6swap" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>swapoff -a  <span class="o">&amp;&amp;</span> sed -i <span class="s1">&#39;/ swap / s/^\(.*\)$/#\1/g&#39;</span> /etc/fstab
+</code></pre></div>
+<h3 id="7selinux">7.禁用selinux<a class="headerlink" href="#7selinux" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>setenforce <span class="m">0</span> 
+sed -i <span class="s2">&quot;s/^SELINUX=enforcing/SELINUX=disabled/g&quot;</span> /etc/sysconfig/selinux
+sed -i <span class="s2">&quot;s/^SELINUX=enforcing/SELINUX=disabled/g&quot;</span> /etc/selinux/config
+</code></pre></div>
+<h3 id="8br_netfilter">8.加载br_netfilter模块<a class="headerlink" href="#8br_netfilter" title="Permanent link">&para;</a></h3>
+<ul>
+<li>由于开启内核 ipv4 转发需要加载 br_netfilter 模块
+<div class="highlight"><pre><span></span><code> modprobe br_netfilter
+</code></pre></div></li>
+</ul>
+<h3 id="9ipv4iptables">9.将桥接的IPv4流量传递到iptables的链<a class="headerlink" href="#9ipv4iptables" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>cat &gt; /etc/sysctl.d/k8s.conf <span class="s">&lt;&lt; EOF</span>
+<span class="s">net.bridge.bridge-nf-call-ip6tables = 1</span>
+<span class="s">net.bridge.bridge-nf-call-iptables = 1</span>
+<span class="s">net.ipv4.ip_forward = 1</span>
+<span class="s">EOF</span>
+
+<span class="c1"># 重启生效</span>
+sysctl --system 
+或
+sysctl -p /etc/sysctl.d/k8s.conf
+</code></pre></div>
+<blockquote>
+<p>Explain:
+bridge-nf 使得 netfilter 可以对 Linux 网桥上的 IPv4/ARP/IPv6 包过滤。比如，设置<code>net.bridge.bridge-nf-call-iptables＝1</code>后，二层的网桥在转发包时也会被 iptables的 FORWARD 规则所过滤。常用的选项包括：
+   - net.bridge.bridge-nf-call-arptables：是否在 arptables 的 FORWARD 中过滤网桥的 ARP 包
+   - net.bridge.bridge-nf-call-ip6tables：是否在 ip6tables 链中过滤 IPv6 包
+   - net.bridge.bridge-nf-call-iptables：是否在 iptables 链中过滤 IPv4 包
+   - net.bridge.bridge-nf-filter-vlan-tagged：是否在 iptables/arptables 中过滤打了 vlan 标签的包。</p>
+</blockquote>
+<h3 id="10-ipvs">10.安装 ipvs：<a class="headerlink" href="#10-ipvs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>保证在节点重启后能自动加载所需模块。使用<code>lsmod | grep -e ip_vs -e nf_conntrack_ipv4</code>命令查看是否已经正确加载所需的内核模块
+<div class="highlight"><pre><span></span><code>cat &gt; /etc/sysconfig/modules/ipvs.modules <span class="s">&lt;&lt;EOF</span>
+<span class="s">#!/bin/bash</span>
+<span class="s">modprobe -- ip_vs</span>
+<span class="s">modprobe -- ip_vs_rr</span>
+<span class="s">modprobe -- ip_vs_wrr</span>
+<span class="s">modprobe -- ip_vs_sh</span>
+<span class="s">modprobe -- nf_conntrack_ipv4</span>
+<span class="s">EOF</span>
+
+chmod <span class="m">755</span> /etc/sysconfig/modules/ipvs.modules <span class="o">&amp;&amp;</span> bash /etc/sysconfig/modules/ipvs.modules <span class="o">&amp;&amp;</span> lsmod <span class="p">|</span> grep -e ip_vs -e nf_conntrack_ipv4
+</code></pre></div></p>
+</li>
+<li>
+<p>接下来还需要确保各个节点上已经安装了 ipset 软件包：
+<div class="highlight"><pre><span></span><code>yum install ipset
+</code></pre></div></p>
+</li>
+<li>
+<p>为了便于查看 ipvs 的代理规则，最好安装一下管理工具 ipvsadm：
+<div class="highlight"><pre><span></span><code>yum install ipvsadm -y
+</code></pre></div></p>
+</li>
+</ul>
+<h3 id="11">11.同步服务器时间<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>yum install chrony -y
+systemctl <span class="nb">enable</span> chronyd <span class="o">&amp;&amp;</span> systemctl start chronyd
+
+chronyc sources
+<span class="c1"># 输出如下内容</span>
+<span class="m">210</span> Number of <span class="nv">sources</span> <span class="o">=</span> <span class="m">4</span>
+MS Name/IP address         Stratum Poll Reach LastRx Last <span class="nv">sample</span>               
+<span class="o">===============================================================================</span>
+^- <span class="m">0</span>.cl.ntp.edgeuno.com          <span class="m">3</span>   <span class="m">6</span>     <span class="m">7</span>     <span class="m">1</span>  -3631us<span class="o">[</span>+4657us<span class="o">]</span> +/-  286ms
+^? ntp8.flashdance.cx            <span class="m">2</span>   <span class="m">6</span>     <span class="m">5</span>     <span class="m">1</span>  -6585us<span class="o">[</span>+1703us<span class="o">]</span> +/-  172ms
+^* time.neu.edu.cn               <span class="m">1</span>   <span class="m">6</span>     <span class="m">7</span>     <span class="m">1</span>   -104us<span class="o">[</span>+8184us<span class="o">]</span> +/-   29ms
+^+ ntp6.flashdance.cx            <span class="m">2</span>   <span class="m">6</span>     <span class="m">7</span>     <span class="m">0</span>    -16ms<span class="o">[</span>  -16ms<span class="o">]</span> +/-  188ms
+<span class="o">(</span>base<span class="o">)</span> <span class="o">[</span>root@automlgpu3 ~<span class="o">]</span><span class="c1"># date</span>
+Wed Jun <span class="m">30</span> <span class="m">13</span>:53:22 CST <span class="m">2021</span>
+</code></pre></div>
+<h3 id="12">12.安装常用软件<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>yum install -y vim  lrzsz wget curl man tree rsync gcc gcc-c++ cmake telnet
+</code></pre></div>
+<hr />
+<h2 id="step2docker">STEP2:安装依赖——Docker<a class="headerlink" href="#step2docker" title="Permanent link">&para;</a></h2>
+<p>详情查阅：<a href="https://www.yuque.com/ronin-ssw/emrye0/hkiq83">【docker-安装-卸载指南】</a></p>
+<ul>
+<li>Note:</li>
+<li>由于默认情况下 kubelet 使用的 cgroupdriver 是 systemd，所以需要保持 docker 和kubelet 的 cgroupdriver 一致，我们这里修改 docker 的 cgroupdriver=systemd。如果不修改 docker 则需要修改 kubelet 的启动配置，需要保证两者一致。</li>
+</ul>
+<hr />
+<h2 id="step3kubeadmkubeletkubectl">STEP3:安装kubeadm/kubelet/kubectl<a class="headerlink" href="#step3kubeadmkubeletkubectl" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Note: 
+- 执行此步骤前确保STEP1和STEP2都成功执行
+- 下列过程使用执行yum源的方式进行安装
+- 此步骤所有的结点都需要执行</p>
+</blockquote>
+<h3 id="1yum">1.设置yum源<a class="headerlink" href="#1yum" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>能使用科学上网设置源的方式
+<div class="highlight"><pre><span></span><code>cat <span class="s">&lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span>
+<span class="s">[kubernetes]</span>
+<span class="s">name=Kubernetes</span>
+<span class="s">baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64</span>
+<span class="s">enabled=1</span>
+<span class="s">gpgcheck=1</span>
+<span class="s">repo_gpgcheck=1</span>
+<span class="s">gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg</span>
+<span class="s">        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</span>
+<span class="s">EOF</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>不能科学上网设置源的方式
+<div class="highlight"><pre><span></span><code>cat <span class="s">&lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span>
+<span class="s">[kubernetes]</span>
+<span class="s">name=Kubernetes</span>
+<span class="s">baseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64</span>
+<span class="s">enabled=1</span>
+<span class="s">gpgcheck=0</span>
+<span class="s">repo_gpgcheck=0</span>
+<span class="s">gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg</span>
+<span class="s">        http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span>
+<span class="s">EOF</span>
+</code></pre></div></p>
+</li>
+</ul>
+<h3 id="2yum">2.重新构建yum缓存<a class="headerlink" href="#2yum" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>yum -y install epel-release
+yum clean all
+yum makecache
+</code></pre></div>
+<h3 id="3kubeadmkubeletkubectl">3.安装kubeadm/kubelet/kubectl<a class="headerlink" href="#3kubeadmkubeletkubectl" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>yum -y install kubelet-1.19.4 kubeadm-1.19.4 kubectl-1.19.4
+
+<span class="c1"># 查看 k8s 的版本</span>
+kubelet --version
+
+<span class="c1"># 查看 kubeadm 的版本</span>
+kubeadm version
+
+<span class="c1"># 查看 kubectl 版本</span>
+kubectl version --client
+</code></pre></div>
+<h3 id="4kubelet">4.设置kubelet服务开机启动<a class="headerlink" href="#4kubelet" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>systemctl <span class="nb">enable</span> kubelet <span class="o">&amp;&amp;</span> systemctl start kubelet
+</code></pre></div>
+<hr />
+<h2 id="step4">STEP4: 初始化集群<a class="headerlink" href="#step4" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Note: master结点配置kubeadm 初始化文件
+- 执行的初始化的方式有多种
+   - 配置yaml的方式
+   - 使用命令行指定配置参数方式</p>
+</blockquote>
+<h3 id="yaml">方式一：配置yaml的方式<a class="headerlink" href="#yaml" title="Permanent link">&para;</a></h3>
+<h4 id="1_1">1.导出默认的初始化配置：<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>$ kubeadm config print init-defaults &gt; kubeadm.yaml
+</code></pre></div>
+<h4 id="2">2.根据需求修改配置<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<blockquote>
+<ul>
+<li>kube-proxy 的模式为 ipvs</li>
+<li>安装 flannel 网络插件,需要将 networking.podSubnet 设置为<code>10.244.0.0/16</code>：</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubeadm.k8s.io/v1beta2</span>
+<span class="nt">bootstrapTokens</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">groups</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">system:bootstrappers:kubeadm:default-node-token</span>
+  <span class="nt">token</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">abcdef.0123456789abcdef</span>
+  <span class="nt">ttl</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">24h0m0s</span>
+  <span class="nt">usages</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">signing</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">authentication</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">InitConfiguration</span>
+<span class="nt">localAPIEndpoint</span><span class="p">:</span>
+  <span class="nt">advertiseAddress</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">192.168.33.131</span>  <span class="c1"># apiserver 节点内网IP</span>
+  <span class="nt">bindPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">6443</span>
+<span class="nt">nodeRegistration</span><span class="p">:</span>
+  <span class="nt">criSocket</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/run/dockershim.sock</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ydzs-master</span>  <span class="c1"># 默认读取当前master节点的hostname</span>
+  <span class="nt">taints</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">effect</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">NoSchedule</span>
+    <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">node-role.kubernetes.io/master</span>
+<span class="nn">---</span>
+<span class="nt">apiServer</span><span class="p">:</span>
+  <span class="nt">timeoutForControlPlane</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4m0s</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubeadm.k8s.io/v1beta2</span>
+<span class="nt">certificatesDir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/kubernetes/pki</span>
+<span class="nt">clusterName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubernetes</span>
+<span class="nt">controllerManager</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+<span class="nt">dns</span><span class="p">:</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CoreDNS</span>
+<span class="nt">etcd</span><span class="p">:</span>
+  <span class="nt">local</span><span class="p">:</span>
+    <span class="nt">dataDir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/lib/etcd</span>
+<span class="nt">imageRepository</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">registry.aliyuncs.com/google_containers</span>  <span class="c1"># 修改成阿里云镜像源</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterConfiguration</span>
+<span class="nt">kubernetesVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1.16.2</span>
+<span class="nt">networking</span><span class="p">:</span>
+  <span class="nt">dnsDomain</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cluster.local</span>
+  <span class="nt">podSubnet</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10.244.0.0/16</span>  <span class="c1"># Pod 网段，flannel插件需要使用这个网段</span>
+  <span class="nt">serviceSubnet</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10.96.0.0/12</span>
+<span class="nt">scheduler</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+<span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubeproxy.config.k8s.io/v1alpha1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">KubeProxyConfiguration</span>
+<span class="nt">mode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ipvs</span>  <span class="c1"># kube-proxy 模式</span>
+</code></pre></div>
+<h4 id="3">3.执行初始化<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>kubeadm init --config kubeadm.yaml
+
+<span class="c1"># 执行成功会显示如下内容</span>
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p <span class="nv">$HOME</span>/.kube
+  sudo cp -i /etc/kubernetes/admin.conf <span class="nv">$HOME</span>/.kube/config
+  sudo chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="nv">$HOME</span>/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run <span class="s2">&quot;kubectl apply -f [podnetwork].yaml&quot;</span> with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join <span class="m">192</span>.168.33.131:6443 --token j7t5rh.7ao1kxy4ngj3ua2u <span class="se">\</span>
+    --discovery-token-ca-cert-hash sha256:22a3006ef3935419f13f3da59592f2450da4fd33035f81bd0d8048efd0cb38aa 
+</code></pre></div>
+<h3 id="_1">方式二：使用命令行指定配置参数方式<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>kubeadm init <span class="se">\</span>
+--apiserver-advertise-address<span class="o">=</span><span class="m">192</span>.168.33.131 <span class="se">\</span>
+--image-repository registry.aliyuncs.com/google_containers <span class="se">\</span>
+--kubernetes-version v1.18.2 <span class="se">\</span>
+--service-cidr<span class="o">=</span><span class="m">10</span>.96.0.0/12 <span class="se">\</span>
+--pod-network-cidr<span class="o">=</span><span class="m">10</span>.244.0.0/16 
+</code></pre></div>
+<ul>
+<li>参数说明：
+<div class="highlight"><pre><span></span><code>--apiserver-advertise-address：本机IP（也是 Master的IP），使用内网IP
+--image-repository registry.aliyuncs.com/google_containers ：拉取镜像的地址，这里使用阿里云的镜像仓库
+--kubernetes-version： k8s 版本号
+--service-cidr：暴露服务的IP网段，IP不与现有的冲突就可以
+--pod-network-cidr： Pod的IP网段，IP不与现有的冲突就可以
+</code></pre></div></li>
+</ul>
+<h3 id="kubeconfig">拷贝 kubeconfig 文件<a class="headerlink" href="#kubeconfig" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>$ mkdir -p <span class="nv">$HOME</span>/.kube
+$ sudo cp -i /etc/kubernetes/admin.conf <span class="nv">$HOME</span>/.kube/config
+$ sudo chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="nv">$HOME</span>/.kube/config
+</code></pre></div>
+<h3 id="_2">查看节点信息<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>状态为NoteReady的原因是没有安装网卡
+<div class="highlight"><pre><span></span><code>kubectl get nodes
+
+<span class="c1"># 输出如下信息：</span>
+NAME        STATUS     ROLES    AGE     VERSION
+centos801   NotReady   master   4h55m   v1.19.4
+</code></pre></div></li>
+</ul>
+<hr />
+<h2 id="step5">STEP5:添加节点<a class="headerlink" href="#step5" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Note: 
+- 安装kubeadm 、 kubelet 、kubectl 
+- 如果忘了token值，可以使用下列命令重新生成
+   - kubeadm token create --print-join-command</p>
+</blockquote>
+<h3 id="1kubeadm-kubelet-kubectl">1.安装kubeadm 、 kubelet 、kubectl<a class="headerlink" href="#1kubeadm-kubelet-kubectl" title="Permanent link">&para;</a></h3>
+<ul>
+<li>可以参考上面master节点的安装方式</li>
+<li>注意:node节点不需要执行init的操作</li>
+</ul>
+<h3 id="2join">2.执行join操作<a class="headerlink" href="#2join" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>kubeadm join <span class="m">192</span>.168.33.131:6443 --token j7t5rh.7ao1kxy4ngj3ua2u <span class="se">\</span>
+    --discovery-token-ca-cert-hash sha256:22a3006ef3935419f13f3da59592f2450da4fd33035f81bd0d8048efd0cb38aa 
+
+<span class="c1"># 执行成功后会显示如下内容：</span>
+<span class="o">[</span>root@centos803 ~<span class="o">]</span><span class="c1"># kubeadm join 192.168.33.131:6443 --token whrgqy.u4qqzag60frlk4vw     --discovery-token-ca-cert-hash sha256:5846f57ce7e8843f5adc272a3261a8b5b158867328134ee745622eef2185e532</span>
+W0304 <span class="m">14</span>:10:56.883083   <span class="m">26739</span> join.go:346<span class="o">]</span> <span class="o">[</span>preflight<span class="o">]</span> WARNING: JoinControlPane.controlPlane settings will be ignored when control-plane flag is not set.
+<span class="o">[</span>preflight<span class="o">]</span> Running pre-flight checks
+        <span class="o">[</span>WARNING Hostname<span class="o">]</span>: hostname <span class="s2">&quot;centos803&quot;</span> could not be reached
+        <span class="o">[</span>WARNING Hostname<span class="o">]</span>: hostname <span class="s2">&quot;centos803&quot;</span>: lookup centos803 on <span class="m">8</span>.8.8.8:53: no such host
+<span class="o">[</span>preflight<span class="o">]</span> Reading configuration from the cluster...
+<span class="o">[</span>preflight<span class="o">]</span> FYI: You can look at this config file with <span class="s1">&#39;kubectl -n kube-system get cm kubeadm-config -oyaml&#39;</span>
+<span class="o">[</span>kubelet-start<span class="o">]</span> Downloading configuration <span class="k">for</span> the kubelet from the <span class="s2">&quot;kubelet-config-1.18&quot;</span> ConfigMap <span class="k">in</span> the kube-system namespace
+<span class="o">[</span>kubelet-start<span class="o">]</span> Writing kubelet configuration to file <span class="s2">&quot;/var/lib/kubelet/config.yaml&quot;</span>
+<span class="o">[</span>kubelet-start<span class="o">]</span> Writing kubelet environment file with flags to file <span class="s2">&quot;/var/lib/kubelet/kubeadm-flags.env&quot;</span>
+<span class="o">[</span>kubelet-start<span class="o">]</span> Starting the kubelet
+<span class="o">[</span>kubelet-start<span class="o">]</span> Waiting <span class="k">for</span> the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run <span class="s1">&#39;kubectl get nodes&#39;</span> on the control-plane to see this node join the cluster.
+</code></pre></div>
+<h3 id="3master">3.在master查看节点信息<a class="headerlink" href="#3master" title="Permanent link">&para;</a></h3>
+<ul>
+<li>状态为NoteReady的原因是没有安装网卡
+<div class="highlight"><pre><span></span><code>kubectl get nodes
+
+<span class="c1"># 输出如下信息：</span>
+NAME        STATUS     ROLES    AGE     VERSION
+centos801   NotReady   master   4h55m   v1.19.4
+centos802   NotReady   &lt;none&gt;   4h16m   v1.19.4
+centos803   NotReady   &lt;none&gt;   3h46m   v1.19.4
+</code></pre></div></li>
+</ul>
+<h2 id="step6">STEP6: 安装网络插件<a class="headerlink" href="#step6" title="Permanent link">&para;</a></h2>
+<p>Note: 在master节点安装就好</p>
+<blockquote>
+<p>常用的kubernetes网络插件有：
+- flannel（此处选择安装）
+- calico</p>
+</blockquote>
+<p><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/">k8s官方文档中网络插件说明</a></p>
+<h3 id="1flannel">1.安装flannel<a class="headerlink" href="#1flannel" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>当我们部署完网络插件后执行 ifconfig 命令，正常会看到新增的<code>cni0</code>与<code>flannel1</code>这两个虚拟设备，但是如果没有看到<code>cni0</code>这个设备也不用太担心，我们可以观察<code>/var/lib/cni</code>目录是否存在，如果不存在并不是说部署有问题，而是该节点上暂时还没有应用运行，我们只需要在该节点上运行一个 Pod 就可以看到该目录会被创建，并且<code>cni0</code>设备也会被创建出来。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>$ wget https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
+<span class="c1"># 因为有节点是多网卡，所以需要在资源清单文件中指定内网网卡</span>
+<span class="c1"># 搜索到名为 kube-flannel-ds-amd64 的 DaemonSet，在kube-flannel容器下面</span>
+$ vi kube-flannel.yml
+......
+containers:
+- name: kube-flannel
+  image: quay.io/coreos/flannel:v0.11.0-amd64
+  command:
+  - /opt/bin/flanneld
+  args:
+  - --ip-masq
+  - --kube-subnet-mgr
+  - --iface<span class="o">=</span>eth0  <span class="c1"># 如果是多网卡的话，指定内网网卡的名称</span>
+......
+$ kubectl apply -f kube-flannel.yml  <span class="c1"># 安装 flannel 网络插件</span>
+</code></pre></div>
+<h3 id="2master">2.再次在master查看节点信息<a class="headerlink" href="#2master" title="Permanent link">&para;</a></h3>
+<ul>
+<li>状态为NoteReady的原因是没有安装网卡
+<div class="highlight"><pre><span></span><code>kubectl get nodes
+
+<span class="c1"># 输出如下信息：</span>
+NAME        STATUS     ROLES    AGE     VERSION
+centos801   Ready      master   4h55m   v1.19.4
+centos802   Ready      &lt;none&gt;   4h16m   v1.19.4
+centos803   Ready      &lt;none&gt;   3h46m   v1.19.4
+</code></pre></div></li>
+</ul>
+<hr />
+<h2 id="_3">备注内容：<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="_4">重置的方法：<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>如果你的集群安装过程中遇到了其他问题，我们可以使用下面的命令来进行重置：
+<div class="highlight"><pre><span></span><code>$ kubeadm reset
+$ ifconfig cni0 down <span class="o">&amp;&amp;</span> ip link delete cni0
+$ ifconfig flannel.1 down <span class="o">&amp;&amp;</span> ip link delete flannel.1
+$ rm -rf /var/lib/cni/
+</code></pre></div></p>
+<hr />
+<h3 id="_5">彻底卸载的方法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+kubeadm reset -f
+modprobe -r ipip
+lsmod
+rm -rf ~/.kube/
+rm -rf /etc/kubernetes/
+rm -rf /etc/systemd/system/kubelet.service.d
+rm -rf /etc/systemd/system/kubelet.service
+rm -rf /usr/bin/kube*
+rm -rf /etc/cni
+rm -rf /opt/cni
+rm -rf /var/lib/etcd
+rm -rf /var/etcd
+yum -y remove kubeadm kubectl kubelet
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../../../goNotes/go-base/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 基础知识" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              基础知识
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            2021, sswang
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.409db549.min.js", "version": "0.1.0"}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.56a63758.min.js"></script>
+      
+        <script src="../../../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
