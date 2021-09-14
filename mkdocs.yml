@@ -87,7 +87,7 @@ nav:
       - python操作Excel: pyNotes/Py工具集/python操作excel文件.md
   - 【 @Note - Golang 】:
     - Go基础: 
-      - goNotes/go-base/基础知识.md
+      - goNotes/go-base/No1-环境安装和配置.md
   - 【 @Note - Devops 】:
     - kubernetes:
       - 【k8s】集群搭建指南: devopsNotes/kubernetes/kubeadm安装集群指南.md
