@@ -88,6 +88,7 @@ nav:
   - 【 @Note - Golang 】:
     - Go基础: 
       - goNotes/go-base/No1-环境安装和配置.md
+      - goNotes/go-base/No2-go基本知识点.md
   - 【 @Note - Devops 】:
     - kubernetes:
       - 【k8s】集群搭建指南: devopsNotes/kubernetes/kubeadm安装集群指南.md
