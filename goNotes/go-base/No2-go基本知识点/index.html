@@ -1,0 +1,1671 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="sswang">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.5">
+    
+    
+      
+        <title>No2 go基本知识点 - RoninssWang-Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.be71726b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#546d78">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="pink">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="RoninssWang-Blog" class="md-header__button md-logo" aria-label="RoninssWang-Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RoninssWang-Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              No2 go基本知识点
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/example/repository/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../pyNotes/python%E5%9F%BA%E7%A1%80/decator/" class="md-tabs__link md-tabs__link--active">
+        NoteHub
+      </a>
+    </li>
+  
+
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="RoninssWang-Blog" class="md-nav__button md-logo" aria-label="RoninssWang-Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    RoninssWang-Blog
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/example/repository/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        NoteHub
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="NoteHub" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          NoteHub
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      <label class="md-nav__link" for="__nav_2_1">
+        【 @Note - Python 】
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="【 @Note - Python 】" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          【 @Note - Python 】
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1" type="checkbox" id="__nav_2_1_1" >
+      
+      <label class="md-nav__link" for="__nav_2_1_1">
+        Py基础
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Py基础" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Py基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pyNotes/python%E5%9F%BA%E7%A1%80/decator/" class="md-nav__link">
+        装饰器的使用
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_2" type="checkbox" id="__nav_2_1_2" >
+      
+      <label class="md-nav__link" for="__nav_2_1_2">
+        Py常用模块
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Py常用模块" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Py常用模块
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pyNotes/%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97/select%E7%9A%84%E4%BD%BF%E7%94%A8/" class="md-nav__link">
+        Select的使用
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pyNotes/%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97/Pickle%E7%9A%84%E4%BD%BF%E7%94%A8/" class="md-nav__link">
+        Pickle的使用
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_3" type="checkbox" id="__nav_2_1_3" >
+      
+      <label class="md-nav__link" for="__nav_2_1_3">
+        Py工具集
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Py工具集" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Py工具集
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pyNotes/Py%E5%B7%A5%E5%85%B7%E9%9B%86/python%E6%93%8D%E4%BD%9Cexcel%E6%96%87%E4%BB%B6/" class="md-nav__link">
+        python操作Excel
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2_2">
+        【 @Note - Golang 】
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="【 @Note - Golang 】" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          【 @Note - Golang 】
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" checked>
+      
+      <label class="md-nav__link" for="__nav_2_2_1">
+        Go基础
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Go基础" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Go基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../No1-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+        No1-环境安装和配置
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          No2 go基本知识点
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        No2 go基本知识点
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go" class="md-nav__link">
+    Go 基本知识点
+  </a>
+  
+    <nav class="md-nav" aria-label="Go 基本知识点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    25个关键字
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    内建类型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    内建常量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    内建函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    常用转换符
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#package" class="md-nav__link">
+    关于package的理解
+  </a>
+  
+    <nav class="md-nav" aria-label="关于package的理解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    概念的理解
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    导包的方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#init" class="md-nav__link">
+    init函数的理解
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main" class="md-nav__link">
+    main函数的使用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    命令规范
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    变量声明的多样性
+  </a>
+  
+    <nav class="md-nav" aria-label="变量声明的多样性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#var" class="md-nav__link">
+    Var 关键字声明
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    := 的方式声明
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_" class="md-nav__link">
+    _ 忽略变量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    变量声明中的类型推断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    变量声明注意事项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practice-code" class="md-nav__link">
+    变量声明的practice-code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    常量的声明
+  </a>
+  
+    <nav class="md-nav" aria-label="常量的声明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#const" class="md-nav__link">
+    const
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iota" class="md-nav__link">
+    枚举iota
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    常用格式化输出函数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      <label class="md-nav__link" for="__nav_2_3">
+        【 @Note - Devops 】
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="【 @Note - Devops 】" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          【 @Note - Devops 】
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3_1" type="checkbox" id="__nav_2_3_1" >
+      
+      <label class="md-nav__link" for="__nav_2_3_1">
+        kubernetes
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="kubernetes" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../devopsNotes/kubernetes/kubeadm%E5%AE%89%E8%A3%85%E9%9B%86%E7%BE%A4%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        【k8s】集群搭建指南
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      <label class="md-nav__link" for="__nav_2_4">
+        【 @study - 综合 】
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="【 @study - 综合 】" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          【 @study - 综合 】
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-guide/writing-your-docs.md" class="md-nav__link">
+        编写文档
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-guide/styling-your-docs.md" class="md-nav__link">
+        设置文档样式
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-guide/configuration.md" class="md-nav__link">
+        配置文件
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-guide/deploying-your-docs.md" class="md-nav__link">
+        部署文档
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-guide/custom-themes.md" class="md-nav__link">
+        自定义主题
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-guide/plugins.md" class="md-nav__link">
+        插件
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go" class="md-nav__link">
+    Go 基本知识点
+  </a>
+  
+    <nav class="md-nav" aria-label="Go 基本知识点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    25个关键字
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    内建类型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    内建常量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    内建函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    常用转换符
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#package" class="md-nav__link">
+    关于package的理解
+  </a>
+  
+    <nav class="md-nav" aria-label="关于package的理解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    概念的理解
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    导包的方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#init" class="md-nav__link">
+    init函数的理解
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main" class="md-nav__link">
+    main函数的使用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    命令规范
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    变量声明的多样性
+  </a>
+  
+    <nav class="md-nav" aria-label="变量声明的多样性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#var" class="md-nav__link">
+    Var 关键字声明
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    := 的方式声明
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_" class="md-nav__link">
+    _ 忽略变量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    变量声明中的类型推断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    变量声明注意事项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practice-code" class="md-nav__link">
+    变量声明的practice-code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    常量的声明
+  </a>
+  
+    <nav class="md-nav" aria-label="常量的声明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#const" class="md-nav__link">
+    const
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iota" class="md-nav__link">
+    枚举iota
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    常用格式化输出函数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/example/repository/edit/master/docs/goNotes/go-base/No2-go基本知识点.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h2 id="_1"><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h1 id="go">Go 基本知识点<a class="headerlink" href="#go" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Note-Time: 2021年09月16日</p>
+</blockquote>
+<h2 id="25">25个关键字<a class="headerlink" href="#25" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">break</span>      <span class="k">default</span>       <span class="kd">func</span>     <span class="kd">interface</span>   <span class="k">select</span>
+<span class="k">case</span>       <span class="k">defer</span>         <span class="k">go</span>       <span class="kd">map</span>         <span class="kd">struct</span>
+<span class="kd">chan</span>       <span class="k">else</span>          <span class="k">goto</span>     <span class="kn">package</span>     <span class="k">switch</span>
+<span class="kd">const</span>      <span class="k">fallthrough</span>   <span class="k">if</span>       <span class="k">range</span>       <span class="kd">type</span>
+<span class="k">continue</span>   <span class="k">for</span>           <span class="kn">import</span>   <span class="k">return</span>      <span class="kd">var</span>
+</code></pre></div>
+<hr />
+<h2 id="_2">内建类型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span>       <span class="kt">int8</span>          <span class="kt">int16</span>         <span class="kt">int32</span>        <span class="kt">int64</span>
+<span class="kt">uint</span>      <span class="kt">uint8</span>         <span class="kt">uint16</span>        <span class="kt">uint32</span>       <span class="kt">uint64</span>   <span class="kt">uintptr</span>
+<span class="kt">float32</span>   <span class="kt">float64</span>       <span class="kt">complex128</span>    <span class="kt">complex64</span>
+<span class="kt">bool</span>      <span class="nb">byte</span><span class="p">(</span><span class="kt">uint8</span><span class="p">)</span>   <span class="nb">rune</span><span class="p">(</span><span class="kt">int32</span><span class="p">)</span>   <span class="kt">string</span>       <span class="kt">error</span>
+</code></pre></div>
+<hr />
+<h2 id="_3">内建常量<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kc">true</span> <span class="kc">false</span> <span class="kc">iota</span> <span class="kc">nil</span>
+</code></pre></div>
+<hr />
+<h2 id="_4">内建函数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nx">make</span>      <span class="nx">len</span>      <span class="nx">cap</span>    <span class="nx">new</span>     <span class="nx">append</span>    <span class="nx">copy</span>     <span class="nx">close</span>  <span class="nx">delete</span>
+<span class="nx">complex</span>   <span class="nx">real</span>     <span class="nx">imag</span>
+<span class="nx">panic</span>     <span class="nx">recover</span>
+</code></pre></div>
+<hr />
+<h2 id="_5">常用转换符<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="nx">d</span>          <span class="nx">十进制整数</span>
+<span class="o">%</span><span class="nx">x</span><span class="p">,</span> <span class="o">%</span><span class="nx">o</span><span class="p">,</span> <span class="o">%</span><span class="nx">b</span>  <span class="nx">十六进制</span><span class="err">，</span><span class="nx">八进制</span><span class="err">，</span><span class="nx">二进制整数</span><span class="err">。</span>
+<span class="o">%</span><span class="nx">f</span><span class="p">,</span> <span class="o">%</span><span class="nx">g</span><span class="p">,</span> <span class="o">%</span><span class="nx">e</span>  <span class="nx">浮点数</span><span class="err">：</span> <span class="mf">3.141593</span> <span class="mf">3.141592653589793</span> <span class="mf">3.141593e+00</span>
+<span class="o">%</span><span class="nx">t</span>          <span class="nx">布尔</span><span class="err">：</span><span class="nx">true或false</span>
+<span class="o">%</span><span class="nx">c</span>          <span class="nx">字符</span><span class="err">（</span><span class="kt">rune</span><span class="err">）</span> <span class="p">(</span><span class="nx">Unicode码点</span><span class="p">)</span>
+<span class="o">%</span><span class="nx">s</span>          <span class="nx">字符串</span>
+<span class="o">%</span><span class="nx">q</span>          <span class="nx">带双引号的字符串</span><span class="s">&quot;abc&quot;</span><span class="nx">或带单引号的字符</span><span class="sc">&#39;c&#39;</span>
+<span class="o">%</span><span class="nx">v</span>          <span class="nx">变量的自然形式</span><span class="err">（</span><span class="nx">natural</span> <span class="nx">format</span><span class="err">）</span>
+<span class="o">%</span><span class="nx">T</span>          <span class="nx">变量的类型</span>
+<span class="o">%%</span>          <span class="nx">字面上的百分号标志</span><span class="err">（</span><span class="nx">无操作数</span><span class="err">）</span>
+</code></pre></div>
+<hr />
+<h2 id="package">关于package的理解<a class="headerlink" href="#package" title="Permanent link">&para;</a></h2>
+<h3 id="_6">概念的理解<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>和python一样，把相同功能的代码放到一个目录，称之为包（package）</li>
+<li>每个go程序都是由包构成，一般以包为单位进行运行</li>
+<li>main包（main函数）是用来生成可执行文件，并且每个程序有且只有一个main包</li>
+<li>包的主要用途是提高代码的可复用性</li>
+</ul>
+<h3 id="_7">导包的方式<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>匿名导入( _ )</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nx">_</span> <span class="s">&quot;learngo/init/lib2&quot;</span>
+<span class="c1">//表示导入这个包，执行导入(调用)包中的init()但是不引用该包中的元素.</span>
+<span class="c1">//fg: 应用场景：比如数数据库驱动的注册</span>
+</code></pre></div>
+<ul>
+<li>包别名</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nx">lb2</span> <span class="s">&quot;learngo/init/lib2&quot;</span>
+<span class="c1">//可直接用lb2代替lib2的包名调用包中对外的函数</span>
+</code></pre></div>
+<ul>
+<li>嵌入式导入</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">.</span> <span class="s">&quot;learngo/init/lib2&quot;</span>
+<span class="c1">//相当于lib2中的代码直接导入当前包，可直接使用lib2中的函数，无需前缀。多个嵌入式导入容易产生变量名重复错误。</span>
+</code></pre></div>
+<h3 id="init">init函数的理解<a class="headerlink" href="#init" title="Permanent link">&para;</a></h3>
+<ul>
+<li>package以递归的形式导入，init()相当于return语句回溯到上一级调用，一般用来初始化包内参数。</li>
+</ul>
+<p><img alt="" src="https://raw.githubusercontent.com/ronin-sswang/upload_notes_img/main/img/202109160045202.png" /></p>
+<h3 id="main">main函数的使用<a class="headerlink" href="#main" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">//1)go语言以包作为管理单位</span>
+<span class="c1">//2)每个文件必须先声明包</span>
+<span class="c1">//3)程序必须有一个main包（重要）</span>
+
+<span class="kn">package</span> <span class="nx">main</span>
+
+<span class="c1">//go语言以双斜杠作为注释的标识</span>
+<span class="cm">/*</span>
+<span class="cm">    这是块注释</span>
+<span class="cm">    可以多段注释</span>
+<span class="cm">*/</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="c1">//入口函数，有且只有一个</span>
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span> <span class="c1">//左括号必须与函数名同行，否则会报错</span>
+    <span class="c1">//打印</span>
+    <span class="c1">//“hello go&quot;打印到屏幕，Println()会自动换行</span>
+    <span class="c1">//调用函数，大部分都需要导入包</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;hello go&quot;</span><span class="p">)</span> <span class="c1">//go语言结尾没有分号</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;hello haha&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="_8">命令规范<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>标识符的命名要尽量采取简短且有意义。</li>
+<li>为变量、函数、常量命名时采用驼峰命名法，例如 stuName、getVal。</li>
+<li>如果首字母大写，则表示它可以被其它的包访问（类似于 <a href="http://c.biancheng.net/java/">Java</a> 中的 public）；如果首字母小写，则表示它只能在本包中使用 (类似于 Java 中 private）。</li>
+</ul>
+<hr />
+<h2 id="_9">变量声明的多样性<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="var">Var 关键字声明<a class="headerlink" href="#var" title="Permanent link">&para;</a></h3>
+<ul>
+<li>又称变量完整声明</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">变量名称</span> <span class="nx">数据类型</span> <span class="p">[</span> <span class="p">=</span> <span class="nx">变量初始值</span><span class="p">]</span>             <span class="c1">//方式一</span>
+<span class="c1">// fg:</span>
+<span class="kd">var</span> <span class="nx">name</span> <span class="kt">string</span>
+
+<span class="kd">var</span> <span class="nx">变量名1</span><span class="p">,</span> <span class="nx">变量名2</span> <span class="p">&lt;</span><span class="nx">变量类型</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nx">初始值1</span><span class="p">,</span><span class="nx">初始值2</span>  <span class="c1">//方式二</span>
+<span class="c1">//fg:</span>
+<span class="kd">var</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="p">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+
+<span class="kd">var</span> <span class="p">(</span>                                        <span class="c1">//方式三</span>
+    <span class="nx">name1</span> <span class="p">=</span> <span class="nx">initialvalue1</span><span class="p">,</span>
+    <span class="nx">name2</span> <span class="p">=</span> <span class="nx">initialvalue2</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="_10">:= 的方式声明<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li>又称短变量声明</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nx">name</span> <span class="o">:=</span> <span class="nx">initialvalue</span>
+<span class="c1">//fg:</span>
+<span class="nx">a</span> <span class="o">:=</span> <span class="mi">1</span>
+
+<span class="c1">//多变量</span>
+<span class="nx">b</span><span class="p">,</span> <span class="nx">c</span> <span class="o">:=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+<span class="nx">name</span><span class="p">,</span> <span class="nx">age</span> <span class="o">:=</span> <span class="s">&quot;xiang&quot;</span><span class="p">,</span> <span class="mi">18</span> 
+</code></pre></div>
+<ul>
+<li>此方式只适用于函数/方法内部，或if/for/switch/的初始化语句中</li>
+<li>在函数外部无法适用（编译不通过）</li>
+</ul>
+<h3 id="_">_ 忽略变量<a class="headerlink" href="#_" title="Permanent link">&para;</a></h3>
+<ul>
+<li>_（下划线）是个特殊的变量名，任何赋予它的值都会被丢弃</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nx">_</span><span class="p">,</span> <span class="nx">b</span> <span class="o">:=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+<span class="c1">//将值2赋予b，并同时丢弃1</span>
+</code></pre></div>
+<hr />
+<h3 id="_11">变量声明中的类型推断<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>如果变量有初始值，那么 Go 能够自动推断具有初始值的变量的类型</li>
+<li>如果变量有初始值，就可以在变量声明中省略 <code>type</code>。</li>
+<li>如果变量声明的语法是 var name = initialvalue，Go 能够根据初始值自动推断变量的类型。</li>
+</ul>
+<hr />
+<h3 id="_12">变量声明注意事项<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li>GO声明的变量就会立即分配内存空间，也就意味着会被默认初始化值</li>
+<li>若一个变量未被赋值，Go 会自动地将其初始化，赋值该变量类型的零值（Zero Value)</li>
+</ul>
+<hr />
+<h3 id="practice-code">变量声明的practice-code<a class="headerlink" href="#practice-code" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//变量的定义</span>
+    <span class="c1">//静态的语言的变量和动态语言的变量定义差异很大</span>
+    <span class="c1">//1. 最基础的变量定义</span>
+    <span class="c1">//var i int // int i</span>
+    <span class="c1">//i = 20</span>
+    <span class="c1">//fmt.Println(i)</span>
+    <span class="c1">//定义并初始化</span>
+    <span class="c1">//var i int = 10</span>
+    <span class="c1">//fmt.Println(i)</span>
+    <span class="c1">//2. 根据值自行判断变量类型（类型推断）</span>
+    <span class="c1">//var i = 100 //并没有设置类型</span>
+    <span class="c1">//fmt.Println(i)</span>
+
+    <span class="c1">// 3. go语言既然一门新语言 省略var</span>
+    <span class="c1">//i := 100</span>
+    <span class="c1">//fmt.Println(i)</span>
+
+    <span class="c1">//var a int = 10</span>
+    <span class="c1">//var b = 10</span>
+    <span class="c1">//c := 10</span>
+    <span class="c1">//fmt.Println(a, b , c)</span>
+
+    <span class="c1">//多变量定义</span>
+    <span class="c1">//var a, b, c int</span>
+    <span class="c1">//a, b, c = 10, 20, 30</span>
+    <span class="c1">//fmt.Println(a, b, c)</span>
+
+    <span class="c1">//var a, b, c int = 10, 20 ,30</span>
+    <span class="c1">//fmt.Println(a, b, c)</span>
+
+    <span class="c1">//// 集合类型</span>
+    <span class="c1">//var (</span>
+    <span class="c1">//  a int</span>
+    <span class="c1">//  name string</span>
+    <span class="c1">//)</span>
+
+    <span class="c1">//var i int =10</span>
+    <span class="c1">//i = 20</span>
+    <span class="c1">//fmt.Println(i)</span>
+
+    <span class="c1">//匿名变量， 变量一旦被定义 不使用</span>
+    <span class="c1">//常量 -</span>
+    <span class="c1">//const PI = 3.1415926</span>
+    <span class="c1">//r := 2.0</span>
+    <span class="c1">//运行过程中， 代码写的不好 一不小心在某个地方将PI给改掉了</span>
+
+    <span class="c1">//枚举</span>
+    <span class="c1">//const (</span>
+    <span class="c1">//  Unknown = 0</span>
+    <span class="c1">//  Female = 1</span>
+    <span class="c1">//  Male = 2</span>
+    <span class="c1">//)</span>
+    <span class="c1">//</span>
+    <span class="c1">////常量组如不指定类型和初始化值，该类型和值和上一行的类型一致</span>
+    <span class="c1">//const (</span>
+    <span class="c1">//  x int = 16</span>
+    <span class="c1">//  y</span>
+    <span class="c1">//  s = &quot;abc&quot;</span>
+    <span class="c1">//  z</span>
+    <span class="c1">//)</span>
+    <span class="c1">//fmt.Println(x,y,s)</span>
+    <span class="c1">//1. 常量的数据类型值可以是布尔，数字 和字符串</span>
+    <span class="c1">//2. 不曾使用的常量，在编译的时候是不会报错</span>
+    <span class="c1">//const常量的iota， 常量计数器 枚举</span>
+    <span class="kd">const</span> <span class="p">(</span>
+        <span class="nx">Book</span> <span class="p">=</span> <span class="kc">iota</span> <span class="c1">//计算器</span>
+        <span class="nx">Cloth</span> <span class="c1">//行</span>
+        <span class="nx">Phone</span>
+        <span class="nx">DeskTop</span>
+    <span class="p">)</span>
+    <span class="c1">//0,1,2 本身不重要， 这三个值不一样</span>
+    <span class="c1">//iota 该常量的值等于上一个常量的表达式</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">Book</span><span class="p">,</span> <span class="nx">Cloth</span><span class="p">,</span> <span class="nx">Phone</span><span class="p">,</span> <span class="nx">DeskTop</span><span class="p">)</span>
+    <span class="c1">//iota你真的懂了吗？</span>
+    <span class="c1">// 1. iota只能在常量组中是使用</span>
+    <span class="c1">// 2. 不同的const定义块互相不干扰</span>
+    <span class="kd">const</span> <span class="p">(</span>
+        <span class="nx">Unknown</span> <span class="p">=</span> <span class="kc">iota</span>
+        <span class="nx">Female</span>
+        <span class="nx">Male</span>
+    <span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">Unknown</span><span class="p">,</span> <span class="nx">Female</span><span class="p">,</span> <span class="nx">Male</span><span class="p">)</span>
+
+    <span class="c1">//3. 没有表达式的常量定义复用上一行的表达式</span>
+    <span class="c1">//4. 从第一行开始，iota从0逐行加一</span>
+    <span class="kd">const</span> <span class="p">(</span>
+        <span class="nx">a</span> <span class="p">=</span> <span class="kc">iota</span> <span class="c1">//iota  = 0</span>
+        <span class="nx">b</span> <span class="p">=</span> <span class="mi">10</span> <span class="c1">//iota = 1 每一行iota加一</span>
+        <span class="nx">c</span> <span class="c1">// c=10 , iota = 2</span>
+        <span class="nx">d</span><span class="p">,</span><span class="nx">e</span> <span class="p">=</span> <span class="kc">iota</span><span class="p">,</span> <span class="kc">iota</span> <span class="c1">//iota=3</span>
+        <span class="nx">f</span> <span class="p">=</span> <span class="kc">iota</span> <span class="c1">//iota=4</span>
+        <span class="c1">//iota代表的是这里的行数</span>
+    <span class="p">)</span>
+
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">d</span><span class="p">,</span> <span class="nx">e</span><span class="p">,</span> <span class="nx">f</span><span class="p">)</span>
+    <span class="c1">//变量的作用域</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="_13">常量的声明<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<h3 id="const">const<a class="headerlink" href="#const" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">identifier</span> <span class="p">[</span><span class="kd">type</span><span class="p">]</span> <span class="p">=</span> <span class="nx">value</span>
+<span class="c1">//fg:</span>
+<span class="kd">const</span> <span class="nx">a</span> <span class="kt">int</span> <span class="p">=</span> <span class="mi">10</span>  <span class="c1">//定义以后不能再被修改</span>
+<span class="c1">//fg:</span>
+<span class="kd">const</span> <span class="nx">a</span> <span class="p">=</span> <span class="mi">55</span>     <span class="c1">// 允许</span>
+      <span class="nx">a</span> <span class="p">=</span> <span class="mi">66</span>     <span class="c1">// 不允许重新赋值</span>
+</code></pre></div>
+<ul>
+<li>常量中的数据类型只可以是布尔型、数字型（整数型、浮点型和复数）和字符串型</li>
+<li>常量不能再重新赋值为其他的值</li>
+<li>常量的值会在编译的时候确定</li>
+<li>常量也可以使用自动推导类型来定义,但是不能使用:=的方式</li>
+</ul>
+<h3 id="iota">枚举iota<a class="headerlink" href="#iota" title="Permanent link">&para;</a></h3>
+<ul>
+<li>预声明标识符iota，它默认开始值是0，一组多个常量同时声明时其值逐行递增</li>
+<li>iota常用来表示自增的枚举变量，专门用来初始化常量</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 1，iota的功能是常量生成器，每隔一行，自动累加1</span>
+    <span class="c1">// 2，iota给常量赋值使用</span>
+
+    <span class="kd">const</span> <span class="p">(</span>
+        <span class="nx">a</span> <span class="p">=</span> <span class="kc">iota</span> <span class="c1">//1</span>
+        <span class="nx">b</span> <span class="p">=</span> <span class="kc">iota</span> <span class="c1">//2</span>
+        <span class="nx">c</span> <span class="p">=</span> <span class="kc">iota</span> <span class="c1">//3</span>
+    <span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;a = %d, b = %d, c = %d\n&quot;</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span>
+
+    <span class="c1">//3，多个iota时，可以只写一个。效果与上边的一样</span>
+    <span class="kd">const</span> <span class="p">(</span>
+        <span class="nx">a1</span> <span class="p">=</span> <span class="kc">iota</span>
+        <span class="nx">b1</span>
+        <span class="nx">c1</span>
+    <span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;a1 = %d, b1 = %d, c1 = %d\n&quot;</span><span class="p">,</span> <span class="nx">a1</span><span class="p">,</span> <span class="nx">b1</span><span class="p">,</span> <span class="nx">c1</span><span class="p">)</span>
+
+    <span class="c1">//4，iota再次遇到cost，将会重置为0</span>
+    <span class="kd">const</span> <span class="nx">d</span> <span class="p">=</span> <span class="kc">iota</span> <span class="c1">//0</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;d =&quot;</span><span class="p">,</span> <span class="nx">d</span><span class="p">)</span>
+
+    <span class="c1">//5，如果在同一行，那么值都一样</span>
+    <span class="kd">const</span> <span class="p">(</span>
+        <span class="nx">i</span>          <span class="p">=</span> <span class="kc">iota</span>
+        <span class="nx">j1</span><span class="p">,</span> <span class="nx">j2</span><span class="p">,</span> <span class="nx">j3</span> <span class="p">=</span> <span class="kc">iota</span><span class="p">,</span> <span class="kc">iota</span><span class="p">,</span> <span class="kc">iota</span>
+        <span class="nx">k</span>          <span class="p">=</span> <span class="kc">iota</span>
+    <span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;i = %d, j1 = %d, j2 = %d, j3 = %d, k = %d\n&quot;</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">j1</span><span class="p">,</span> <span class="nx">j2</span><span class="p">,</span> <span class="nx">j3</span><span class="p">,</span> <span class="nx">k</span><span class="p">)</span>
+
+  <span class="c1">//位运算方式</span>
+  <span class="kd">const</span> <span class="p">(</span>
+    <span class="nx">Open</span> <span class="p">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="kc">iota</span> <span class="c1">//1</span>
+    <span class="nx">Close</span> <span class="c1">//2</span>
+    <span class="nx">Pending</span> <span class="c1">//4</span>
+<span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="_14">常用格式化输出函数<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+<span class="kn">import</span> <span class="s">&quot;os&quot;</span>
+
+<span class="kd">type</span> <span class="nx">point</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// Go提供了几种打印格式，用来格式化一般的Go值，例如</span>
+    <span class="c1">// 下面的%v打印了一个point结构体的对象的值</span>
+    <span class="nx">p</span> <span class="o">:=</span> <span class="nx">point</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%v\n&quot;</span><span class="p">,</span> <span class="nx">p</span><span class="p">)</span>
+
+    <span class="c1">// 如果所格式化的值是一个结构体对象，那么`%+v`的格式化输出</span>
+    <span class="c1">// 将包括结构体的成员名称和值</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%+v\n&quot;</span><span class="p">,</span> <span class="nx">p</span><span class="p">)</span>
+
+    <span class="c1">// `%#v`格式化输出将输出一个值的Go语法表示方式。</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%#v\n&quot;</span><span class="p">,</span> <span class="nx">p</span><span class="p">)</span>
+
+    <span class="c1">// 使用`%T`来输出一个值的数据类型</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%T\n&quot;</span><span class="p">,</span> <span class="nx">p</span><span class="p">)</span>
+
+    <span class="c1">// 格式化布尔型变量</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%t\n&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+
+    <span class="c1">// 有很多的方式可以格式化整型，使用`%d`是一种</span>
+    <span class="c1">// 标准的以10进制来输出整型的方式</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d\n&quot;</span><span class="p">,</span> <span class="mi">123</span><span class="p">)</span>
+
+    <span class="c1">// 这种方式输出整型的二进制表示方式</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%b\n&quot;</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+
+    <span class="c1">// 这里打印出该整型数值所对应的字符</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%c\n&quot;</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
+
+    <span class="c1">// 使用`%x`输出一个值的16进制表示方式</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%x\n&quot;</span><span class="p">,</span> <span class="mi">456</span><span class="p">)</span>
+
+    <span class="c1">// 浮点型数值也有几种格式化方法。最基本的一种是`%f`</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%f\n&quot;</span><span class="p">,</span> <span class="mf">78.9</span><span class="p">)</span>
+
+    <span class="c1">// `%e`和`%E`使用科学计数法来输出整型</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%e\n&quot;</span><span class="p">,</span> <span class="mf">123400000.0</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%E\n&quot;</span><span class="p">,</span> <span class="mf">123400000.0</span><span class="p">)</span>
+
+    <span class="c1">// 使用`%s`输出基本的字符串</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%s\n&quot;</span><span class="p">,</span> <span class="s">&quot;\&quot;string\&quot;&quot;</span><span class="p">)</span>
+
+    <span class="c1">// 输出像Go源码中那样带双引号的字符串，需使用`%q`</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%q\n&quot;</span><span class="p">,</span> <span class="s">&quot;\&quot;string\&quot;&quot;</span><span class="p">)</span>
+
+    <span class="c1">// `%x`以16进制输出字符串，每个字符串的字节用两个字符输出</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%x\n&quot;</span><span class="p">,</span> <span class="s">&quot;hex this&quot;</span><span class="p">)</span>
+
+    <span class="c1">// 使用`%p`输出一个指针的值</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%p\n&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">p</span><span class="p">)</span>
+
+    <span class="c1">// 当输出数字的时候，经常需要去控制输出的宽度和精度。</span>
+    <span class="c1">// 可以使用一个位于%后面的数字来控制输出的宽度，默认</span>
+    <span class="c1">// 情况下输出是右对齐的，左边加上空格</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;|%6d|%6d|\n&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">345</span><span class="p">)</span>
+
+    <span class="c1">// 你也可以指定浮点数的输出宽度，同时你还可以指定浮点数</span>
+    <span class="c1">// 的输出精度</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;|%6.2f|%6.2f|\n&quot;</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">3.45</span><span class="p">)</span>
+
+    <span class="c1">// To left-justify, use the `-` flag.</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;|%-6.2f|%-6.2f|\n&quot;</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">3.45</span><span class="p">)</span>
+
+    <span class="c1">// 你也可以指定输出字符串的宽度来保证它们输出对齐。默认</span>
+    <span class="c1">// 情况下，输出是右对齐的</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;|%6s|%6s|\n&quot;</span><span class="p">,</span> <span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">)</span>
+
+    <span class="c1">// 为了使用左对齐你可以在宽度之前加上`-`号</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;|%-6s|%-6s|\n&quot;</span><span class="p">,</span> <span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">)</span>
+
+    <span class="c1">// `Printf`函数的输出是输出到命令行`os.Stdout`的，你</span>
+    <span class="c1">// 可以用`Sprintf`来将格式化后的字符串赋值给一个变量</span>
+    <span class="nx">s</span> <span class="o">:=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;a %s&quot;</span><span class="p">,</span> <span class="s">&quot;string&quot;</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+
+    <span class="c1">// 你也可以使用`Fprintf`来将格式化后的值输出到`io.Writers`</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Fprintf</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stderr</span><span class="p">,</span> <span class="s">&quot;an %s\n&quot;</span><span class="p">,</span> <span class="s">&quot;error&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../No1-%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/" class="md-footer__link md-footer__link--prev" aria-label="上一页: No1-环境安装和配置" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              No1-环境安装和配置
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../../devopsNotes/kubernetes/kubeadm%E5%AE%89%E8%A3%85%E9%9B%86%E7%BE%A4%E6%8C%87%E5%8D%97/" class="md-footer__link md-footer__link--next" aria-label="下一页: 【k8s】集群搭建指南" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              【k8s】集群搭建指南
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            2021, sswang
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tabs"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.409db549.min.js", "version": "0.1.0"}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.56a63758.min.js"></script>
+      
+        <script src="../../../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../js/baidu-tongji.js"></script>
+      
+    
+  </body>
+</html>
