@@ -76,33 +76,29 @@ extra_javascript:
 # 导航
 nav:
 - Home: index.md
-- NoteHub:
-  - 【 @Note - Python 】:
-    - Py基础: 
-      - 装饰器的使用: pyNotes/python基础/decator.md
-    - Py常用模块:
-      - Select的使用: pyNotes/常用模块/select的使用.md
-      - Pickle的使用: pyNotes/常用模块/Pickle的使用.md
-    - Py工具集:
-      - python操作Excel: pyNotes/Py工具集/python操作excel文件.md
-  - 【 @Note - Golang 】:
-    - Go基础: 
-      - goNotes/go-base/No1-环境安装和配置.md
-      - goNotes/go-base/No2-go基本知识点.md
-  - 【 @Note - Devops 】:
-    - kubernetes:
-      - 【k8s】集群搭建指南: devopsNotes/kubernetes/kubeadm安装集群指南.md
+
+- 【 Note@-Python 】:
+  - Py基础: 
+    - 装饰器的使用: pyNotes/python基础/decator.md
+  - Py常用模块:
+    - Select的使用: pyNotes/常用模块/select的使用.md
+    - Pickle的使用: pyNotes/常用模块/Pickle的使用.md
+  - Py工具集:
+    - python操作Excel: pyNotes/Py工具集/python操作excel文件.md
+- 【 Note@-Golang 】:
+  - Go基础: 
+    - goNotes/go-base/No1-环境安装和配置.md
+    - goNotes/go-base/No2-go基本知识点.md
+    - goNotes/go-base/No3-基本数据类型和数据结构.md
+- 【 Note@-Devops 】:
+  - kubernetes:
+    - 【k8s】集群搭建指南: devopsNotes/kubernetes/kubeadm安装集群指南.md
   # - 【 @study - AI学习 】:
   #   - 编写文档: user-guide/writing-your-docs.md
   # - 【 @study - BigData 】:
   #   - 编写文档: user-guide/writing-your-docs.md
-  - 【 @study - 综合 】:
-    - 编写文档: user-guide/writing-your-docs.md
-    - 设置文档样式: user-guide/styling-your-docs.md
-    - 配置文件: user-guide/configuration.md
-    - 部署文档: user-guide/deploying-your-docs.md
-    - 自定义主题: user-guide/custom-themes.md
-    - 插件: user-guide/plugins.md
+# - 【 @study - 综合 】:
+  
 # - Life - 时笺:
 #   - 予时光以意义: user-guide/writing-your-docs.md
 # - About - Self:
