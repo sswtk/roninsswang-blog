@@ -1,4 +1,4 @@
-# No3-基本数据类型和数据结构
+# No3-基本数据类型
 
 > Note-Time: 2021年09月17日01:56:28
 
@@ -8,16 +8,22 @@
 
 ### 基本类型
 
-- bool (布尔)
-- string(字符串)
-- 数值类型：
-  - 整数:  
-    - int、int8、int16、int32、int64
-    - uint、uint8、uint16、uint32、uint64、uintptr
-  - 浮点数:         float32               float64
-  - 复数：          complex64        complex128
-  - byte(字节):   uint8 的别名
-  - rune:             int32 的别名
+|     类型     |   名称   | 长度 | 零值  |                     说明                      |
+| :----------: | :------: | :--: | :---: | :-------------------------------------------: |
+|    `bool`    | 布尔类型 |  1   | false | 其值不为真即为假，不可以用数字代表true或false |
+|    `byte`    |  字节型  |  1   |   0   |                   uint8别名                   |
+|     rune     | 字符类型 |  4   |   0   |      专用于存储unicode编码，等价于uint32      |
+| `init,uint`  |   整型   | 4或8 |   0   |                  23位或64位                   |
+|  int8,uint8  |   整型   |  1   |   0   |                -128-127,0-255                 |
+| int16,uint16 |   整型   |  2   |   0   |             -32768-32768,0-65535              |
+| int32,uint32 |   整型   |  4   |   0   |              -21亿-21亿，0-42亿               |
+| int64,uint64 |   整型   |  8   |   0   |                                               |
+|  `float32`   |  浮点型  |  4   |  0.0  |                小数位精确到7位                |
+|  `float64`   |  浮点型  |  8   |  0.0  |               小数位精确到15位                |
+|  complex64   | 复数类型 |  8   |       |                                               |
+|  complex128  | 复数类型 |  16  |       |                                               |
+|   unitptr    |   整型   | 4或8 |       |       足以存储指针的uint32或uint64整数        |
+|   `string`   |  字符串  |      |  ""   |                  utf-8字符串                  |
 
 ### 值类型
 
@@ -39,7 +45,7 @@
 
 
 
-## 类型详述
+## 基本类型详述
 
 ###  bool —布尔
 
@@ -52,17 +58,22 @@ package main
 import "fmt"
 
 func main() {
-  var w bool = true
-  fmt.Println(w)     // true
+  //bool
+	var w bool // 申声明变量，如果没有初始化，默认为false
+	var ww bool = true
+	var www = true //自动推断类型
+	fmt.Println(w, ww, www)
 	a := true
 	b := false
-	fmt.Println(a, b)  //true false
-	c := a && b 
-	fmt.Println(c)     //false
+	fmt.Println(a, b)
+	c := a && b
+	fmt.Println(c)
 	d := a || b
-	fmt.Println(d)     //true
+	fmt.Println(d)
 }
 ```
+
+
 
 ---
 
@@ -83,10 +94,19 @@ import "fmt"
 
 func main() {
 	//string
+	var str1 string // 声明字符串类型
+	str1 = "aaa"
+	fmt.Println("str1=", str1)
 	first := "Ronin"
 	last := "ssWang"
 	name := first + last
 	fmt.Println("My name is", name)
+	fmt.Printf("name 的类型是 %T\n", name)
+	
+	// len()，内建函数，可以返回字符串有多少个字符
+	fmt.Println("len(name)=", len(name))  //len(name)=11
+  //如果只想操作某个字符，可用如下方式
+	fmt.Printf("name[0] = %c, name[1] = %c", name[0], name[1])
 }
 
 ```
@@ -112,6 +132,8 @@ fmt.Println(strings.ContainsAny("test",""))//false
 fmt.Println(strings.ContainsAny("test","tr"))//true
 fmt.Println(strings.Count("test", "t"))//2
 ```
+
+
 
 ---
 
@@ -282,19 +304,158 @@ for index,value := range "123ABCabc"{
 
 ---
 
-### 数值类型
+#### byte—字符
 
+```go
+package main
 
+import "fmt"
 
+func main() {
+	//byte
+	var n byte
+	n = 87
+	fmt.Printf("%c, %d\n", n, n)  //%c:以字符的形式打印，%d:以整型方式打印
+	var ch byte
+	ch = 'a'  // 单引号表示字符， 双引号表示字符串
+	fmt.Printf("%c, %d\n", ch, ch) 
+}
 
+```
 
+---
 
+#### rune
 
+- rune默认的字符编码是utf-8类型的
+- rune内置两种字符类型
+  - byte字节类型（byte是uint的别名）
+  - 表示Unicode编码的字符rune, 在go内部是int32类型的别名，占用4个字节
 
+```go
+package main
 
+import "fmt"
 
+func main() {
+	//rune
+	str := "nihao你好"
+	fmt.Println(len(str))
+	k := []byte(str)
+	for _, v := range k {
+		fmt.Print(string(v)) //nihaoä½ å¥½
+	}
+	fmt.Println("")
+	r := []rune(str)
+	for _, v := range r {
+		fmt.Print(string(v)) // nihao你好
+	}
+	fmt.Println("")
+	r[0] = 'N'
+	r[5] = '您'
+	fmt.Println(string(r)) // Nihao您好
+}
 
+```
 
+---
 
-## 数据结构
+#### float—浮点型
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// float
+	var y float32
+	y = 3.3
+	yy := 6.555 // 自动推导类型，默认是float64,要比float32更精确
+	fmt.Println("y=", y)
+	fmt.Printf("yy的类型为 %T", yy) //yy的类型为 float64
+}
+```
+
+---
+
+#### complex—复数类型
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	//complex
+	var t complex128
+	t = 2.1 + 3.14i
+	fmt.Println("t=", t)
+	t1 := 3.3 + 5.5i
+	fmt.Printf("t1的类型是%T\n", t1)
+	// 通过内建函数，取出实部和虚部
+	fmt.Println("real(t1)=", real(t1), "imag(t1)=", imag(t1)) //real(t1)= 3.3 imag(t1)= 5.5
+
+}
+```
+
+---
+
+### 常用类型转换
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	//不能转换的类型，叫不兼容类型，先举一个不能转换的例子
+	var flag bool
+	flag = true
+	fmt.Printf("flag = %t\n", flag)
+
+	//bool类型不能转换为int
+	//fmt.Printf("flag = %d\n", int(flag))
+
+	// 0就是假，非0就是真
+	// 整型也不能转换为bool
+	// flag = bool(1)
+
+	//再举一个能够转换的例子。
+
+	var ch byte
+	ch = 'a' //字符类型本质上就是整型
+	var t int
+	t = int(ch) //类型转换，表示把ch的值取出来之后，转成int再赋给t
+	fmt.Println("t =", t)
+}
+```
+
+---
+
+### 给类型取别名
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	//给int64起一个别名bigint，别名的关键字是type
+	type bigint int64
+	var a bigint //等价于 var a int64
+	fmt.Printf("a type is %T\n", a)
+
+	//也可以一次性起多个别名
+	type (
+		long int64
+		char byte
+	)
+	var b long = 11
+	var c char = 'a'
+	fmt.Printf("b = %d, c = %d\n", b, c)
+}
+```
+
+---
 
