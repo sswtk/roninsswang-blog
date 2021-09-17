@@ -16,7 +16,7 @@
     
     
       
-        <title>No3-基本数据类型和数据结构 - RoninssWang-Blog</title>
+        <title>No3-基本数据类型 - RoninssWang-Blog</title>
       
     
     
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              No3-基本数据类型和数据结构
+              No3-基本数据类型
             
           </span>
         </div>
@@ -533,8 +533,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../No2-go%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E7%82%B9/" class="md-nav__link">
-        No2 go基本知识点
+      <a href="../No2-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E7%82%B9/" class="md-nav__link">
+        No2-基本知识点
       </a>
     </li>
   
@@ -555,12 +555,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          No3-基本数据类型和数据结构
+          No3-基本数据类型
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        No3-基本数据类型和数据结构
+        No3-基本数据类型
       </a>
       
         
@@ -627,10 +627,10 @@
       
         <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
-    类型详述
+    基本类型详述
   </a>
   
-    <nav class="md-nav" aria-label="类型详述">
+    <nav class="md-nav" aria-label="基本类型详述">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -731,6 +731,34 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#byte" class="md-nav__link">
+    byte—字符
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rune" class="md-nav__link">
+    rune
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#float" class="md-nav__link">
+    float—浮点型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complex" class="md-nav__link">
+    complex—复数类型
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -738,7 +766,14 @@
         
           <li class="md-nav__item">
   <a href="#_17" class="md-nav__link">
-    数值类型
+    常用类型转换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    给类型取别名
   </a>
   
 </li>
@@ -748,17 +783,22 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
-    数据结构
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../No4-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        No4 基本数据结构
+      </a>
     </li>
   
 
@@ -919,10 +959,10 @@
       
         <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
-    类型详述
+    基本类型详述
   </a>
   
-    <nav class="md-nav" aria-label="类型详述">
+    <nav class="md-nav" aria-label="基本类型详述">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1023,6 +1063,34 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#byte" class="md-nav__link">
+    byte—字符
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rune" class="md-nav__link">
+    rune
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#float" class="md-nav__link">
+    float—浮点型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complex" class="md-nav__link">
+    complex—复数类型
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1030,20 +1098,20 @@
         
           <li class="md-nav__item">
   <a href="#_17" class="md-nav__link">
-    数值类型
+    常用类型转换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    给类型取别名
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
-    数据结构
-  </a>
   
 </li>
       
@@ -1059,31 +1127,128 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/example/repository/edit/master/docs/goNotes/go-base/No3-基本数据类型和数据结构.md" title="编辑此页" class="md-content__button md-icon">
+                  <a href="https://github.com/example/repository/edit/master/docs/goNotes/go-base/No3-基本数据类型.md" title="编辑此页" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="no3-">No3-基本数据类型和数据结构<a class="headerlink" href="#no3-" title="Permanent link">&para;</a></h1>
+                <h1 id="no3-">No3-基本数据类型<a class="headerlink" href="#no3-" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p>Note-Time: 2021年09月17日01:56:28</p>
 </blockquote>
 <h2 id="_1">数据类型分类概述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="_2">基本类型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<ul>
-<li>bool (布尔)</li>
-<li>string(字符串)</li>
-<li>数值类型：</li>
-<li>整数:  <ul>
-<li>int、int8、int16、int32、int64</li>
-<li>uint、uint8、uint16、uint32、uint64、uintptr</li>
-</ul>
-</li>
-<li>浮点数:         float32               float64</li>
-<li>复数：          complex64        complex128</li>
-<li>byte(字节):   uint8 的别名</li>
-<li>rune:             int32 的别名</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">名称</th>
+<th align="center">长度</th>
+<th align="center">零值</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>bool</code></td>
+<td align="center">布尔类型</td>
+<td align="center">1</td>
+<td align="center">false</td>
+<td align="center">其值不为真即为假，不可以用数字代表true或false</td>
+</tr>
+<tr>
+<td align="center"><code>byte</code></td>
+<td align="center">字节型</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">uint8别名</td>
+</tr>
+<tr>
+<td align="center">rune</td>
+<td align="center">字符类型</td>
+<td align="center">4</td>
+<td align="center">0</td>
+<td align="center">专用于存储unicode编码，等价于uint32</td>
+</tr>
+<tr>
+<td align="center"><code>init,uint</code></td>
+<td align="center">整型</td>
+<td align="center">4或8</td>
+<td align="center">0</td>
+<td align="center">23位或64位</td>
+</tr>
+<tr>
+<td align="center">int8,uint8</td>
+<td align="center">整型</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">-128-127,0-255</td>
+</tr>
+<tr>
+<td align="center">int16,uint16</td>
+<td align="center">整型</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">-32768-32768,0-65535</td>
+</tr>
+<tr>
+<td align="center">int32,uint32</td>
+<td align="center">整型</td>
+<td align="center">4</td>
+<td align="center">0</td>
+<td align="center">-21亿-21亿，0-42亿</td>
+</tr>
+<tr>
+<td align="center">int64,uint64</td>
+<td align="center">整型</td>
+<td align="center">8</td>
+<td align="center">0</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>float32</code></td>
+<td align="center">浮点型</td>
+<td align="center">4</td>
+<td align="center">0.0</td>
+<td align="center">小数位精确到7位</td>
+</tr>
+<tr>
+<td align="center"><code>float64</code></td>
+<td align="center">浮点型</td>
+<td align="center">8</td>
+<td align="center">0.0</td>
+<td align="center">小数位精确到15位</td>
+</tr>
+<tr>
+<td align="center">complex64</td>
+<td align="center">复数类型</td>
+<td align="center">8</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">complex128</td>
+<td align="center">复数类型</td>
+<td align="center">16</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">unitptr</td>
+<td align="center">整型</td>
+<td align="center">4或8</td>
+<td align="center"></td>
+<td align="center">足以存储指针的uint32或uint64整数</td>
+</tr>
+<tr>
+<td align="center"><code>string</code></td>
+<td align="center">字符串</td>
+<td align="center"></td>
+<td align="center">""</td>
+<td align="center">utf-8字符串</td>
+</tr>
+</tbody>
+</table>
 <h3 id="_3">值类型<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>array(数组) 、 struct（结构体）、 string</li>
@@ -1101,7 +1266,7 @@
 <li>func</li>
 </ul>
 <hr />
-<h2 id="_7">类型详述<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h2 id="_7">基本类型详述<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="bool">bool —布尔<a class="headerlink" href="#bool" title="Permanent link">&para;</a></h3>
 <ul>
 <li>布尔类型只可以是常量true或false</li>
@@ -1112,15 +1277,18 @@
 <span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
 
 <span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">w</span> <span class="kt">bool</span> <span class="p">=</span> <span class="kc">true</span>
-  <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">w</span><span class="p">)</span>     <span class="c1">// true</span>
+  <span class="c1">//bool</span>
+    <span class="kd">var</span> <span class="nx">w</span> <span class="kt">bool</span> <span class="c1">// 申声明变量，如果没有初始化，默认为false</span>
+    <span class="kd">var</span> <span class="nx">ww</span> <span class="kt">bool</span> <span class="p">=</span> <span class="kc">true</span>
+    <span class="kd">var</span> <span class="nx">www</span> <span class="p">=</span> <span class="kc">true</span> <span class="c1">//自动推断类型</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">ww</span><span class="p">,</span> <span class="nx">www</span><span class="p">)</span>
     <span class="nx">a</span> <span class="o">:=</span> <span class="kc">true</span>
     <span class="nx">b</span> <span class="o">:=</span> <span class="kc">false</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span>  <span class="c1">//true false</span>
-    <span class="nx">c</span> <span class="o">:=</span> <span class="nx">a</span> <span class="o">&amp;&amp;</span> <span class="nx">b</span> 
-    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>     <span class="c1">//false</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span>
+    <span class="nx">c</span> <span class="o">:=</span> <span class="nx">a</span> <span class="o">&amp;&amp;</span> <span class="nx">b</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
     <span class="nx">d</span> <span class="o">:=</span> <span class="nx">a</span> <span class="o">||</span> <span class="nx">b</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>     <span class="c1">//true</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
 <hr />
@@ -1139,10 +1307,19 @@
 
 <span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">//string</span>
+    <span class="kd">var</span> <span class="nx">str1</span> <span class="kt">string</span> <span class="c1">// 声明字符串类型</span>
+    <span class="nx">str1</span> <span class="p">=</span> <span class="s">&quot;aaa&quot;</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;str1=&quot;</span><span class="p">,</span> <span class="nx">str1</span><span class="p">)</span>
     <span class="nx">first</span> <span class="o">:=</span> <span class="s">&quot;Ronin&quot;</span>
     <span class="nx">last</span> <span class="o">:=</span> <span class="s">&quot;ssWang&quot;</span>
     <span class="nx">name</span> <span class="o">:=</span> <span class="nx">first</span> <span class="o">+</span> <span class="nx">last</span>
     <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;My name is&quot;</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;name 的类型是 %T\n&quot;</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span>
+
+    <span class="c1">// len()，内建函数，可以返回字符串有多少个字符</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;len(name)=&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">name</span><span class="p">))</span>  <span class="c1">//len(name)=11</span>
+  <span class="c1">//如果只想操作某个字符，可用如下方式</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;name[0] = %c, name[1] = %c&quot;</span><span class="p">,</span> <span class="nx">name</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">name</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="string_1">string的常用操作<a class="headerlink" href="#string_1" title="Permanent link">&para;</a></h4>
@@ -1297,8 +1474,136 @@
     <span class="p">}</span>
 </code></pre></div>
 <hr />
-<h3 id="_17">数值类型<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
-<h2 id="_18">数据结构<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
+<h4 id="byte">byte—字符<a class="headerlink" href="#byte" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//byte</span>
+    <span class="kd">var</span> <span class="nx">n</span> <span class="kt">byte</span>
+    <span class="nx">n</span> <span class="p">=</span> <span class="mi">87</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%c, %d\n&quot;</span><span class="p">,</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>  <span class="c1">//%c:以字符的形式打印，%d:以整型方式打印</span>
+    <span class="kd">var</span> <span class="nx">ch</span> <span class="kt">byte</span>
+    <span class="nx">ch</span> <span class="p">=</span> <span class="sc">&#39;a&#39;</span>  <span class="c1">// 单引号表示字符， 双引号表示字符串</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%c, %d\n&quot;</span><span class="p">,</span> <span class="nx">ch</span><span class="p">,</span> <span class="nx">ch</span><span class="p">)</span> 
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h4 id="rune">rune<a class="headerlink" href="#rune" title="Permanent link">&para;</a></h4>
+<ul>
+<li>rune默认的字符编码是utf-8类型的</li>
+<li>rune内置两种字符类型</li>
+<li>byte字节类型（byte是uint的别名）</li>
+<li>表示Unicode编码的字符rune, 在go内部是int32类型的别名，占用4个字节</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//rune</span>
+    <span class="nx">str</span> <span class="o">:=</span> <span class="s">&quot;nihao你好&quot;</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">str</span><span class="p">))</span>
+    <span class="nx">k</span> <span class="o">:=</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span>
+    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">k</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nx">Print</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">v</span><span class="p">))</span> <span class="c1">//nihaoä½ å¥½</span>
+    <span class="p">}</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+    <span class="nx">r</span> <span class="o">:=</span> <span class="p">[]</span><span class="nb">rune</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span>
+    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">r</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nx">Print</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">v</span><span class="p">))</span> <span class="c1">// nihao你好</span>
+    <span class="p">}</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+    <span class="nx">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="sc">&#39;N&#39;</span>
+    <span class="nx">r</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">=</span> <span class="sc">&#39;您&#39;</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">r</span><span class="p">))</span> <span class="c1">// Nihao您好</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h4 id="float">float—浮点型<a class="headerlink" href="#float" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// float</span>
+    <span class="kd">var</span> <span class="nx">y</span> <span class="kt">float32</span>
+    <span class="nx">y</span> <span class="p">=</span> <span class="mf">3.3</span>
+    <span class="nx">yy</span> <span class="o">:=</span> <span class="mf">6.555</span> <span class="c1">// 自动推导类型，默认是float64,要比float32更精确</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;y=&quot;</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;yy的类型为 %T&quot;</span><span class="p">,</span> <span class="nx">yy</span><span class="p">)</span> <span class="c1">//yy的类型为 float64</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h4 id="complex">complex—复数类型<a class="headerlink" href="#complex" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//complex</span>
+    <span class="kd">var</span> <span class="nx">t</span> <span class="kt">complex128</span>
+    <span class="nx">t</span> <span class="p">=</span> <span class="mf">2.1</span> <span class="o">+</span> <span class="m">3.14i</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;t=&quot;</span><span class="p">,</span> <span class="nx">t</span><span class="p">)</span>
+    <span class="nx">t1</span> <span class="o">:=</span> <span class="mf">3.3</span> <span class="o">+</span> <span class="m">5.5i</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;t1的类型是%T\n&quot;</span><span class="p">,</span> <span class="nx">t1</span><span class="p">)</span>
+    <span class="c1">// 通过内建函数，取出实部和虚部</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;real(t1)=&quot;</span><span class="p">,</span> <span class="nb">real</span><span class="p">(</span><span class="nx">t1</span><span class="p">),</span> <span class="s">&quot;imag(t1)=&quot;</span><span class="p">,</span> <span class="nb">imag</span><span class="p">(</span><span class="nx">t1</span><span class="p">))</span> <span class="c1">//real(t1)= 3.3 imag(t1)= 5.5</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="_17">常用类型转换<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//不能转换的类型，叫不兼容类型，先举一个不能转换的例子</span>
+    <span class="kd">var</span> <span class="nx">flag</span> <span class="kt">bool</span>
+    <span class="nx">flag</span> <span class="p">=</span> <span class="kc">true</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;flag = %t\n&quot;</span><span class="p">,</span> <span class="nx">flag</span><span class="p">)</span>
+
+    <span class="c1">//bool类型不能转换为int</span>
+    <span class="c1">//fmt.Printf(&quot;flag = %d\n&quot;, int(flag))</span>
+
+    <span class="c1">// 0就是假，非0就是真</span>
+    <span class="c1">// 整型也不能转换为bool</span>
+    <span class="c1">// flag = bool(1)</span>
+
+    <span class="c1">//再举一个能够转换的例子。</span>
+
+    <span class="kd">var</span> <span class="nx">ch</span> <span class="kt">byte</span>
+    <span class="nx">ch</span> <span class="p">=</span> <span class="sc">&#39;a&#39;</span> <span class="c1">//字符类型本质上就是整型</span>
+    <span class="kd">var</span> <span class="nx">t</span> <span class="kt">int</span>
+    <span class="nx">t</span> <span class="p">=</span> <span class="nb">int</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span> <span class="c1">//类型转换，表示把ch的值取出来之后，转成int再赋给t</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;t =&quot;</span><span class="p">,</span> <span class="nx">t</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="_18">给类型取别名<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//给int64起一个别名bigint，别名的关键字是type</span>
+    <span class="kd">type</span> <span class="nx">bigint</span> <span class="kt">int64</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="nx">bigint</span> <span class="c1">//等价于 var a int64</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;a type is %T\n&quot;</span><span class="p">,</span> <span class="nx">a</span><span class="p">)</span>
+
+    <span class="c1">//也可以一次性起多个别名</span>
+    <span class="kd">type</span> <span class="p">(</span>
+        <span class="nx">long</span> <span class="kt">int64</span>
+        <span class="nx">char</span> <span class="kt">byte</span>
+    <span class="p">)</span>
+    <span class="kd">var</span> <span class="nx">b</span> <span class="nx">long</span> <span class="p">=</span> <span class="mi">11</span>
+    <span class="kd">var</span> <span class="nx">c</span> <span class="nx">char</span> <span class="p">=</span> <span class="sc">&#39;a&#39;</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;b = %d, c = %d\n&quot;</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
                 
               
               
@@ -1318,7 +1623,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../No2-go%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E7%82%B9/" class="md-footer__link md-footer__link--prev" aria-label="上一页: No2 go基本知识点" rel="prev">
+        <a href="../No2-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E7%82%B9/" class="md-footer__link md-footer__link--prev" aria-label="上一页: No2-基本知识点" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1327,20 +1632,20 @@
               <span class="md-footer__direction">
                 上一页
               </span>
-              No2 go基本知识点
+              No2-基本知识点
             </div>
           </div>
         </a>
       
       
         
-        <a href="../../../devopsNotes/kubernetes/kubeadm%E5%AE%89%E8%A3%85%E9%9B%86%E7%BE%A4%E6%8C%87%E5%8D%97/" class="md-footer__link md-footer__link--next" aria-label="下一页: 【k8s】集群搭建指南" rel="next">
+        <a href="../No4-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="md-footer__link md-footer__link--next" aria-label="下一页: No4 基本数据结构" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              【k8s】集群搭建指南
+              No4 基本数据结构
             </div>
           </div>
           <div class="md-footer__button md-icon">
