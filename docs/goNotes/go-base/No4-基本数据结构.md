@@ -437,6 +437,238 @@ AT&T T-Mobile
 
 4.数组属于值类型的，即将一个数组赋值给另外一个数组的时候，实际上就是将整个数组拷贝一份。
 
+---
+
+
+
+
+
+## Slice—切片
+
+> Note-Time: 2021年09月19日01:02:22
+
+### 定义
+
+- slice是对数组的一个连续片段的引用，其本身并不是数组，它指向底层的数组。
+- slice是一个引用类型。
+- slice默认指向一段连续的内存区域，可以是数组，也可以是slice本身。
+- 如果多个slice指向相同的底层数组，其中一个的值改变了会影响全部。
+- 数组是值传递，slice是引用传递
+
+> Note: 
+>
+> - 使用make()创建， 
+> - 使用len()获取元素个数，
+> - cap()获取容量,一般从slice的开始位置直至底层数组的结束位置
+
+### slice的结构体格式：
+
+```go
+type IntSlice struct {
+  ptr       *int
+  len, cap  int
+}
+```
+
+### 创建的slice的方式
+
+#### 方式一:
+
+- var 声明一个新slice,未被初始化的slice 为nil
+
+```go
+var identifier []type
+//fg:
+// 声明字符串切片
+var strList []string
+// 声明整型切片
+var numList []int
+// 声明一个空切片
+var numListEmpty = []int{}
+```
+
+#### 方式二：
+
+- make,动态创建切片
+
+```go
+//make( []Type, size, cap )  
+init_slice := make ([]string, cap)  //cap 为预分配的元素数量，这个值设定后不影响 size，只是提前分配空间，降低多次分配空间造成性能问题
+//fg:
+tmp_slice1 := make([]string, 4)
+tmp_slice2 := make([]int, 2, 10)
+```
+
+#### 方式三：
+
+- array——>slice
+
+```go
+// slice [开始位置 : 结束位置]
+var names = [3]string{"bobo", "jake", "tom"}
+subName := names[1:2]  // subName就是一个slice
+
+```
+
+#### 方式四:
+
+- new
+
+```go
+subName1 := new([]string)
+```
+
+### 常用操作
+
+#### append添加元素
+
+- 如果最终长度未超过追加到slice的容量则返回原始slice，如果超过追加到的slice的容量则将重新分配内容地址并拷贝原始数据。
+- 如果空间不足以容纳足够多的元素，切片就会进行“扩容”，此时新切片的长度会发生改变。容量的扩展规律是按容量的 2 倍数进行扩充，例如 1、2、4、8、16……
+- 切片开头添加元素一般都会导致内存的重新分配，而且会导致已有元素全部被复制 1 次，因此，从切片的开头添加元素的性能要比从尾部追加元素的性能差很多。
+- slice支持链式操作，可以将多个append操作组合起来
+
+```go
+//开头添加
+var a = []int{1,2,3}
+a = append([]int{0}, a...) // 在开头添加1个元素
+a = append([]int{-3,-2,-1}, a...) // 在开头添加1个切片
+
+//尾部添加
+var a []int
+a = append(a, 1) // 追加1个元素
+a = append(a, 1, 2, 3) // 追加多个元素, 手写解包方式
+a = append(a, []int{1,2,3}...) // 追加一个切片, 切片需要解包
+
+//链式操作
+var a []int
+a = append(a[:i], append([]int{x}, a[i:]...)...) // 在第i个位置插入x
+a = append(a[:i], append([]int{1,2,3}, a[i:]...)...) // 在第i个位置插入切片
+
+
+//自动扩容
+var numbers []int
+for i := 0; i < 10; i++ {
+    numbers = append(numbers, i)
+    fmt.Printf("len: %d  cap: %d pointer: %p\n", len(numbers), cap(numbers), numbers)
+}
+// log
+len: 1  cap: 1 pointer: 0xc0000ae2a0
+len: 2  cap: 2 pointer: 0xc0000ae2b0
+len: 3  cap: 4 pointer: 0xc0000c4020
+len: 4  cap: 4 pointer: 0xc0000c4020
+len: 5  cap: 8 pointer: 0xc0000b00c0
+len: 6  cap: 8 pointer: 0xc0000b00c0
+len: 7  cap: 8 pointer: 0xc0000b00c0
+len: 8  cap: 8 pointer: 0xc0000b00c0
+len: 9  cap: 16 pointer: 0xc0000c6000
+len: 10  cap: 16 pointer: 0xc0000c6000
+
+```
+
+#### 删除元素
+
+- go语音并并没有对删除slice元素提供专用的语法或者接口
+
+- 如果有删除的需求，需要使用slice本身的特性来删除元素
+
+- 删除slice元素的本质是：以被删除元素为分界点，将前后两个部分的内存重新连接起来
+
+  ![](https://raw.githubusercontent.com/ronin-sswang/upload_notes_img/main/img/202109190051698.png)
+
+```go
+//从开头删除
+a := []int{1, 2, 3}
+ // 删除开头1个元素
+a = a[1:] // [2,3]
+a = append(a[:0], a[1:]...) // 删除开头1个元素
+a = append(a[:0], a[N:]...) // 删除开头N个元素
+//使用copy()函数删除开头的元素
+a := []int{1, 2, 3}
+a = a[:copy(a, a[1:])] // 删除开头1个元素
+a = a[:copy(a, a[N:])] // 删除开头N个元素
+
+//从中间位置开始删除
+a = []int{1, 2, 3, ...}
+a = append(a[:i], a[i+1:]...) // 删除中间1个元素
+a = append(a[:i], a[i+N:]...) // 删除中间N个元素
+a = a[:i+copy(a[i:], a[i+1:])] // 删除中间1个元素
+a = a[:i+copy(a[i:], a[i+N:])] // 删除中间N个元素
+
+//从尾部删除
+a = []int{1, 2, 3}
+a = a[:len(a)-1] // 删除尾部1个元素
+a = a[:len(a)-N] // 删除尾部N个元素
+```
+
+#### copy()拷贝
+
+- copy()可以将一个切片复制到另外一个切片中，返回值表示实际发生复制的元素个数
+- 如果加入的两个切片不一样大，就会按照其中较小的那个切片的元素个数进行复制
+- 目标切片必须分配过空间且足够承载复制的元素个数，并且来源和目标的类型必须一致
+
+```go
+// 将 srcSlice 复制到 destSlice
+copy( destSlice, srcSlice []T) int
+
+//切片大小不一致
+slice1 := []int{1, 2, 3, 4, 5}
+slice2 := []int{5, 4, 3}
+copy(slice2, slice1) // 只会复制slice1的前3个元素到slice2中
+fmt.Println(slice2)
+copy(slice1, slice2) // 只会复制slice2的3个元素到slice1的前3个位置
+fmt.Println(slice1)
+// log
+[1 2 3]
+[1 2 3 4 5]
+
+// 复制对原值影响
+unc main() {
+    // 设置元素数量为1000
+    const elementCount = 1000
+    // 预分配足够多的元素切片
+    srcData := make([]int, elementCount)
+    // 将切片赋值
+    for i := 0; i < elementCount; i++ {
+        srcData[i] = i
+    }
+    // 引用切片数据
+    refData := srcData
+    // 预分配足够多的元素切片
+    copyData := make([]int, elementCount)
+    // 将数据复制到新的切片空间中
+    copy(copyData, srcData)
+    // 修改原始数据的第一个元素
+    srcData[0] = 999
+    // 打印引用切片的第一个元素
+    fmt.Println(refData[0])
+    // 打印复制切片的第一个和最后一个元素
+    fmt.Println(copyData[0], copyData[elementCount-1])
+    // 复制原始数据从4到6(不包含)
+    copy(copyData, srcData[4:6])
+    for i := 0; i < 5; i++ {
+        fmt.Printf("%d ", copyData[i])
+    }
+}
+// log
+999
+0 999
+4 5 2 3 4 
+
+```
+
+#### 多维slice
+
+```go
+//sliceName 为切片的名字
+//sliceType为切片的类型，每个[]代表着一个维度，切片有几个维度就需要几个[]
+var sliceName [][]...[]sliceType
+
+// 声明一个二维整型切片并赋值
+slice := [][]int{{10}, {100, 200}}
+// 为第一个切片追加值为 20 的元素
+slice[0] = append(slice[0], 20)
+```
+
 
 
 
@@ -447,19 +679,9 @@ AT&T T-Mobile
 
 
 
-### Slice—切片
 
 
-
----
-
-
-
-
-
-
-
-### Map—字典
+## Map—字典
 
 ---
 
