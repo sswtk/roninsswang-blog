@@ -3,11 +3,10 @@
 
 > I always forget to tell you that how lucky I am to encounter you
 
-> 忘了告诉你，遇见你是多么幸运……
+> 在记录中沉淀，在表达中成长
 
 
 <!-- ## 这是个人学习、工作、生活的记录 -->
-
 
 
 

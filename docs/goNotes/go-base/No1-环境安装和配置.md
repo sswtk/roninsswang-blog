@@ -187,7 +187,7 @@ go env  # 查看go的环境变量
 go env -w GO111MODULE=off 
 ```
 
---- 
+---
 
 #### go 版本高于1.14放入配置
 

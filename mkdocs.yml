@@ -91,6 +91,7 @@ nav:
     - goNotes/go-base/No2-基本知识点.md
     - goNotes/go-base/No3-基本数据类型.md
     - goNotes/go-base/No4-基本数据结构.md
+    - goNotes/go-base/No5-指针和结构体.md
 - 【 Note@-Devops 】:
   - kubernetes:
     - 【k8s】集群搭建指南: devopsNotes/kubernetes/kubeadm安装集群指南.md

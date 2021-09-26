@@ -1,14 +1,14 @@
 ## 基本数据结构
 
-> Note-Time: 2021年09月18日01:57:14
+> @CreateTime: 2021年09月18日01:57:14
 >
-> Update-Time: 2021年09月23日01:47:13
+> @UpdateTime: 2021年09月23日01:47:13
 
 
 
 ## Array—数组 
 
-### 定义
+### 数组的理解
 
 - 数组是具有相同唯一类型的一组已编号且长度固定的数据项序列。
 - 上述唯一类型可以说his任意的原始类型如：整型、字符串或自定义类型
@@ -108,16 +108,24 @@ func main() {
 
 - 通过将数组作为参数传递给 `len` 函数，可以得到数组的长度。
 
-#### 普通迭代（遍历）
+#### for遍历
 
 - `for` 循环可用于遍历数组中的元素。
 
-#### range迭代（遍历）
+#### range遍历
 
 - `range` 返回索引和该索引处的值， 并且可以获取数组中所有元素的总和。
 - 如果你只需要值并希望忽略索引，则可以通过用 `_` 空白标识符替换索引来执行。
 
 #### Practice-Code
+
+```go
+arr[:]      //代表所有元素
+arr[:5]     //代表前五个元素，即区间的左闭右开
+arr[5:]     //代表从第5个开始（不包含第5个）
+len(arr)    //数组的长度
+//以上操作会引发类型的变化，数组将会转化为slice
+```
 
 ```go
 package main
@@ -143,7 +151,7 @@ func main() {
 	ee := [...]float64{33.3, 45.2, 43, 89.1}
 	fmt.Println("length of ee is", len(ee)) //length of ee is 4
 
-	//数组的操作---迭代、遍历
+	//数组的操作---for遍历
 	for i := 0; i < len(ee); i++ {
 		fmt.Printf("%d th element of ee is %.2f\n", i, ee[i])
 		//0 th element of ee is 33.30
@@ -175,7 +183,7 @@ func main() {
 
 ### 数组的拓展
 
-#### 数组作为参数传递给函数
+#### 数组作为函数参数
 
 - 当数组作为参数传递给函数时，它是按照值传递，而原始数组保持不变
 
@@ -267,13 +275,14 @@ func main() {
 
 > Note-Time: 2021年09月19日01:02:22
 
-### 定义
+### 切片的理解
 
 - slice是对数组的一个连续片段的引用，其本身并不是数组，它指向底层的数组。
 - slice是一个引用类型。
 - slice默认指向一段连续的内存区域，可以是数组，也可以是slice本身。
 - 如果多个slice指向相同的底层数组，其中一个的值改变了会影响全部。
 - 数组是值传递，slice是引用传递
+- 切片的遍历可以使用for循环，也可以使用range函数
 
 > Note: 
 >
@@ -281,16 +290,23 @@ func main() {
 > - 使用len()获取元素个数，
 > - cap()获取容量,一般从slice的开始位置直至底层数组的结束位置
 
-### slice的结构体格式：
+### slice的存储结构体：
 
 ```go
 type IntSlice struct {
-  ptr       *int
-  len, cap  int
+  array = unsafe.Pointer    //指向底层数组的指针
+  len int                   //切片元素数量    
+  cap int                   //底层数组的容量
 }
 ```
 
-### 创建的slice的方式
+> Note:
+>
+> - 切片通过内部的指针和相关属性引用数组片段，实现了变长方案，Slice并不是真正意义上的动态数组。
+>
+> - 合理设置存储能力，可以大幅提升性能，比如知道最多元素个数为50，那么提前设置为50，而不是先设为30，可以明显减少重新分配内存的操作。
+
+### 切片的创建
 
 #### 方式一:
 
@@ -338,7 +354,35 @@ subName := names[1:2]  // subName就是一个slice
 subName1 := new([]string)
 ```
 
-### 常用操作
+### 切片的常用操作
+
+#### 关于切片的内置函数
+
+```go
+len()			                      //返回切片长度
+cap()			                      //返回切片底层数组容量
+append()		                    //对切片追加元素
+func copy(dst, src []Type) int  //将src中数据拷贝到dst中，返回拷贝的元素个数
+```
+
+```go
+// 声明一个数组
+var array = [10]byte{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
+// 声明两个slice
+var aSlice, bSlice []byte
+
+// 演示一些简便操作
+aSlice = array[:3] // 等价于aSlice = array[0:3] aSlice包含元素: a,b,c
+aSlice = array[5:] // 等价于aSlice = array[5:10] aSlice包含元素: f,g,h,i,j
+aSlice = array[:] // 等价于aSlice = array[0:10] 这样aSlice包含了全部的元素
+
+// 从slice中获取slice
+aSlice = array[3:7] // aSlice包含元素: d,e,f,g，len=4，cap=7
+bSlice = aSlice[1:3] // bSlice 包含aSlice[1], aSlice[2] 也就是含有: e,f
+bSlice = aSlice[:3] // bSlice 包含 aSlice[0], aSlice[1], aSlice[2] 也就是含有: d,e,f
+bSlice = aSlice[0:5] // 对slice的slice可以在cap范围内扩展，此时bSlice包含：d,e,f,g,h
+bSlice = aSlice[:] // bSlice包含所有aSlice的元素: d,e,f,g
+```
 
 #### append添加元素
 
@@ -476,6 +520,35 @@ unc main() {
 
 ```
 
+#### 字符串转切片
+
+```go
+str := "hello,世界"
+a := []byte(str)		//字符串转换为[]byte类型切片
+b := []rune(str)		//字符串转换为[]rune类型切片
+```
+
+#### 切片作为函数参数
+
+```go
+func test(s []int) {
+	fmt.Printf("test---%p\n", s) // 打印与main函数相同的地址
+	s = append(s, 1, 2, 3, 4, 5)
+	fmt.Printf("test---%p\n", s) // 一旦append的数据超过切片长度，则会打印新地址
+	fmt.Println("test---", s)    // [0 0 0 1 2 3 4 5]
+}
+
+func main() {
+
+	s1 := make([]int, 3)
+	test(s1)
+	fmt.Printf("main---%p\n", s1) // 不会因为test函数内的append而改变
+	fmt.Println("main---", s1)    // [ 0 0 0]
+}
+```
+
+
+
 #### 多维slice
 
 ```go
@@ -497,11 +570,18 @@ slice[0] = append(slice[0], 20)
 
 ---
 
-> Note-Time:  2021年09月23日02:37:34
-
-
+> @CreateTime:  2021年09月23日02:37:34
+>
+> @UpdateTime: 2021年09月27日00:26:01
 
 > Go- map ---> python-dict
+
+### map的理解
+
+- map是一个无序键值对集合
+- map的长度是不固定的，也就是和slice一样，也是一种引用类型
+- 内置的len函数同样适用于map，返回map拥有的key的数量
+- map和其他基本型别不同，它不是thread-safe，在多个go-routine存取时，必须使用mutex lock机制
 
 ### map的创建
 
@@ -537,7 +617,7 @@ func main() {
 
 ### Map 中key的类型
 
-- map中的key 不是所有的类型都支持，该类型需要支持 == 或 != 操作
+- map中的key 不是所有的类型都支持，该类型需要支持 == 或 != 操作，[]内的类型指任意可以进行比较的类型
 - key的常用类型：
   - int
   - rune
@@ -637,7 +717,7 @@ func main() {
 
 #### 遍历
 
-- map的遍历是无序的
+- map的遍历是无序的，固在遍历是不能通过index获取，二必须通过key获取
 - 使用for range遍历时，k,v 使用同一块内存
 
 ```go

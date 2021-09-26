@@ -25,21 +25,28 @@
 |   unitptr    |   整型   | 4或8 |       |       足以存储指针的uint32或uint64整数        |
 |   `string`   |  字符串  |      |  ""   |                  utf-8字符串                  |
 
-### 值类型
+### 类型归纳
 
-- array(数组) 、 struct（结构体）、 string
+#### 值类型
 
-### 引用类型
+- 整型：    int8,          uint   
+- 浮点型    float32,    float64
+- 布尔型    bool
+- 数组        array 
+- 结构体    struct
+- 字符串    string
+- 复数        complex
 
-- slice (切片)、map(字典)，chan
+#### 引用类型
 
-### 接口类型
+- 切片      slice
+- 字典      map
+- 指针       *
+- 函数      func
+- 接口      interface
+- 管道      chan
 
-- interface
-
-### 函数类型
-
-- func
+> Note: go语言没有字符型，使用byte来保存单个字母
 
 ---
 
@@ -110,6 +117,38 @@ func main() {
 }
 
 ```
+
+#### 对字符串进行修改的方式
+
+> 虽然字符串不可以直接改变，但是可以通过以下两种方式进行修改
+
+- 方式一：通过转换为字节数组 []byte类型，构造一个临时字符串
+
+- 方式二：使用切片
+
+**Practice-Code**
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	//方式一
+	str := "hello"
+  strTemp := []byte(str)
+  fmt.Println("strTemp=", strTemp)			// [104 101 108 108 111]
+  strTemp[0] = 'c'
+  strResult := string(strTemp)
+  fmt.Println("strResult=", strResult)		// strResult= cello
+	
+	//方式二
+  str := "hello"
+  str = "c"+ str[1:]		// 1: 表示从第1位开始到最后
+}
+```
+
+
 
 #### string的常用操作
 
@@ -458,4 +497,36 @@ func main() {
 ```
 
 ---
+
+## 扩展
+
+### go语言中的零值机制
+
+> 初始化时自带默认值
+
+```go
+int     0
+int8    0
+int32   0
+int64   0
+uint    0x0
+rune    0           //rune的实际类型是 int32
+byte    0x0         // byte的实际类型是 uint8
+float32 0           //长度为 4 byte
+float64 0           //长度为 8 byte
+bool    false
+string  ""
+```
+
+### go中的NaN非数
+
+- 函数`math.IsNaN`用于测试一个数是否是非数NaN，
+- 函数`math.NaN`则返回非数对应的值。
+- 虽然可以用math.NaN来表示一个非法的结果，但是测试一个结果是否是非数NaN则是充满风险的，因为NaN和任何数都是不相等的。
+
+```go
+nan := math.NaN()
+// "false false false"
+fmt.Println(nan == nan, nan < nan, nan > nan) 
+```
 
